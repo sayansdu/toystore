@@ -5,7 +5,7 @@
 package controller;
 
 import entity.User;
-import service.Service;
+import service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
@@ -13,94 +13,58 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Shere
- */
-//@WebServlet(name = "Login", urlPatterns = {"/Login"})
 public class Login extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP
-     * <code>GET</code> and
-     * <code>POST</code> methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws java.io.IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP
-     * <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws java.io.IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP
-     * <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws java.io.IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        HttpSession session = request.getSession();
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        if((email == null || email.trim().length()==0) || password == null || password.trim().length()==0){
+            session.setAttribute("login-error", "Email или пароль неправильно введен");
+            response.sendRedirect("/Kupon/login-register.jsp");
+            return;
+        }
         try {
-            Service conn = new Service();
+            UserService conn = new UserService();
             User user = conn.getLogin(email, password);
             if (user!=null) {
-                HttpSession session = request.getSession();
-                if(session.getAttribute("login")!=null)
-                    session.removeAttribute("login");
+                if(session.getAttribute("login-error")!=null)
+                    session.removeAttribute("login-error");
 
-                session.setAttribute("currentUser", user);
+                session.setAttribute("current_user", user);
                 if(user.getStatus().equals("admin")){
                     response.sendRedirect("admin");
                 }
 
                 else if(user.getStatus().equals("courier"))
-                    response.sendRedirect("courier/main.jsp");
+                    response.sendRedirect("courier/index.jsp");
                 else
                     response.sendRedirect("buyer");
 
             } else {
-                HttpSession session = request.getSession();
-                session.setAttribute("login", "Email или пароль неправильно");
-                response.sendRedirect("login.jsp");
+                session.setAttribute("login-error", "Email или пароль неправильно введен");
+                response.sendRedirect("/Kupon/login-register.jsp");
             }
         } catch (Exception ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 }

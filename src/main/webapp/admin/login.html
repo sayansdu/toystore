@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Вход в административную часть - Игрушечный магазин</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<link rel="icon" href="images/icon.png" type="image/x-icon">
+		<!-- bootstrap -->
+		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">      
+		<link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+		
+		<link href="css/bootstrappage.css" rel="stylesheet"/>
+		
+		<!-- мой стиль -->
+		<link href="css/flexslider.css" rel="stylesheet"/>
+		<link href="css/main.css" rel="stylesheet"/>
+
+		<!-- скрипты -->
+		<script src="js/jquery-1.7.2.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>				
+		<script src="js/superfish.js"></script>	
+		<script src="js/jquery.scrolltotop.js"></script>
+
+	</head>
+    <body>		
+		
+		<div id="wrapper" class="container">
+			<section class="navbar main-menu">
+				<div class="navbar-inner main-menu">				
+					<a href="index.jsp" class="logo pull-left"><img src="images/logo.png" class="site_logo" alt=""></a>
+					
+				</div>
+			</section>
+						
+			<section class="main-content">
+				<div class="row">
+					<div class="span12">					
+						<h4 class="title"><span class="text"><strong>Авторизуйтесь</strong></span></h4>
+						
+							<fieldset id="login_form">
+									<div class="loginform-in">
+										
+										
+										<fieldset>
+											<form action="./" method="post">
+													<label for="name">Логин:</label>
+													<div class="controls">
+													<input type="text" name="login" id="login" placeholder="Введите ваш email" class="input-xlarge" />
+													</div>
+													<label for="name">Пароль:</label>
+													<div class="controls">
+													<input type="password" size="30"  name="pwd" id="pwd"   placeholder="Введите ваш пароль" class="input-xlarge"/>
+													</div>
+													<div class="controls">
+													<div class="error" id="add_error"></div>
+													</div><br>
+													<div class="controls">
+													<button tabindex="9"  id="enter" name="enter" class="btn btn-inverse large " type="submit">Войти</button>
+													
+													</div>
+										    </form>	
+										</fieldset>
+									</div>
+							</fieldset>
+										
+					</div>
+					
+				</div>
+			</section>
+			
+			<section id="footer-bar">
+			</section>
+			<section id="copyright">
+				<span styl="">ВСЕ ПРАВА ЗАЩИЩЕНЫ 2014. 
+			</section>
+		</div>
+		<script src="js/common.js"></script>
+		<script src="js/jquery.flexslider-min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$(document).ready(function() {
+					$('.flexslider').flexslider({
+						animation: "fade",
+						slideshowSpeed: 4000,
+						animationSpeed: 600,
+						controlNav: false,
+						directionNav: true,
+						controlsContainer: ".flex-container" // the container that holds the flexslider
+					});
+				});
+			});
+		</script>
+    </body>
+</html>

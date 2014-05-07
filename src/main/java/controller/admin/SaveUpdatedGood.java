@@ -1,6 +1,6 @@
 package controller.admin;
 
-import service.Service;
+import service.GoodService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -59,9 +59,9 @@ public class SaveUpdatedGood extends HttpServlet {
         long id = Long.parseLong(id_str);
 
         System.out.println(name+" "+description+" "+category);
-        Service service;
+        GoodService service;
         try {
-            service = new Service();
+            service = new GoodService();
             service.updateGood(id, name, description, category, price, amount);
             session.removeAttribute("updating_object");
         } catch (Exception e) {

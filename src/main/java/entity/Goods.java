@@ -5,12 +5,15 @@ import java.util.Date;
 public class Goods {
 
     private long id;
+    private int price;
     private String name;
     private String description;
-    private String category;
+    private String producer;
+    private Category category;
+    private Section section;
     private String photoDirectory;
-    private int price;
-    private int amount;
+    private String color;
+    private String size;
     private Date create_time;
 
     public long getId() {
@@ -37,14 +40,6 @@ public class Goods {
         this.description = description;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public String getPhotoDirectory() {
         return photoDirectory;
     }
@@ -61,14 +56,6 @@ public class Goods {
         this.price = price;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
     public Date getCreate_time() {
         return create_time;
     }
@@ -77,14 +64,44 @@ public class Goods {
         this.create_time = create_time;
     }
 
-    @Override
-    public String toString() {
-        return "Goods{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", category='" + category + '\'' +
-                ", price=" + price +
-                ", amount=" + amount +
-                '}';
+    public String getProducer() {
+        return producer;
     }
+
+    public void setProducer(String producer) {
+        this.producer = producer;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Section getSection() {
+        return section;
+    }
+
+    public void setSection(Section section) {
+        this.section = section;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
 }

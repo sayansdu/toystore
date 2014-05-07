@@ -1,6 +1,6 @@
 package controller.user;
 
-import dal.Dal;
+import dal.UserRepository;
 import entity.Goods;
 
 import javax.servlet.ServletException;
@@ -28,11 +28,12 @@ public class All_Goods extends HttpServlet {
         if(session.getAttribute("login")!=null)
             session.removeAttribute("login");
 
-        Dal dal = new Dal();
+        UserRepository dal = new UserRepository();
         List<Goods> goods = dal.getGoods();
         session.setAttribute("goods", goods);
 
-        response.sendRedirect("/Kupon/buyer/main.jsp");
+//        response.sendRedirect("/Kupon/buyer/main.jsp");
+        response.sendRedirect("/Kupon/cabinet.jsp");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

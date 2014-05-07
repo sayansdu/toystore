@@ -1,7 +1,7 @@
 package controller.admin;
 
 import entity.Goods;
-import service.Service;
+import service.GoodService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,9 +22,9 @@ import java.io.IOException;
 public class UpdateGood extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("update_id");
-        Service service;
+        GoodService service;
         try {
-            service = new Service();
+            service = new GoodService();
             Goods good = service.getGoodById(Long.parseLong(id));
             HttpSession session = request.getSession();
             session.setAttribute("updating_object", good);

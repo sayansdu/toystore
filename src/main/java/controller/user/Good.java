@@ -1,6 +1,6 @@
 package controller.user;
 
-import dal.Dal;
+import dal.UserRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,7 +24,7 @@ public class Good extends HttpServlet {
         if(session.getAttribute("goods")!=null)
             session.removeAttribute("goods");
 
-        Dal dal = new Dal();
+        UserRepository dal = new UserRepository();
 
         response.sendRedirect("/Kupon/buyer/good.jsp");
     }

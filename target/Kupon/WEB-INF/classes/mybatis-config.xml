@@ -15,6 +15,8 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="UserMapper.xml"/>
+        <mapper resource="user/UserMapper.xml"/>
+        <mapper resource="goods/GoodMapper.xml"/>
+        <mapper resource="goods/CategoryMapper.xml"/>
     </mappers>
 </configuration>

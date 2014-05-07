@@ -51,7 +51,7 @@ and open the template in the editor.
 
                     <div class="floatLeft">
                         <h1><%
-                            User user = (User) session.getAttribute("currentUser");
+                            User user = (User) session.getAttribute("current_user");
                             List<Goods> goods = (List<Goods>) session.getAttribute("goods");
                             out.println("buyer "+user.getEmail());
                         %>
@@ -97,12 +97,6 @@ and open the template in the editor.
         </div>
 
     </div>
-
-
-
-
-
-
 
 </body>
 </html>

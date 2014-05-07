@@ -35,7 +35,7 @@ and open the template in the editor.
             <div class="floatRight width25 lightBlueBg horzPad">
 
                 <ul class="submenu2">
-                    <li><a href="index.jsp">Главная</a></li>
+                    <li><a href="main.jsp">Главная</a></li>
                     <li><a href="login.jsp">Вход  </a></li>
                     <li><a href="registration.jsp">Регистрация </a></li>
 

@@ -5,7 +5,7 @@
 package controller;
 
 import entity.User;
-import service.Service;
+import service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,33 +23,11 @@ import java.util.regex.Pattern;
  */
 public class Registration extends HttpServlet {
 
-
-
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP
-     * <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws java.io.IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
 
-    /**
-     * Handles the HTTP
-     * <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws java.io.IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -57,9 +35,10 @@ public class Registration extends HttpServlet {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         String name = request.getParameter("name");
-        String surname = request.getParameter("surname");
+        String telephone = request.getParameter("telephone");
         String password = request.getParameter("password");
         String passwordc = request.getParameter("passwordc");
+        String address = request.getParameter("address");
         String email = request.getParameter("email");
 
         if(name==null || name.isEmpty() || name.length()<2 ){
@@ -71,12 +50,12 @@ public class Registration extends HttpServlet {
         }
 
 
-        if(surname==null || surname.isEmpty() || surname.length()<2 ){
+        if(telephone==null || telephone.isEmpty() || telephone.length()<2 ){
             counter++;
-            session.setAttribute("error-surname", "Фамилия должно содержать минимум 2 символа");
+            session.setAttribute("error-telephone", "Номер не должен быть пустым и содержать цифры");
         }
         else
-            session.setAttribute("error-surname", null);
+            session.setAttribute("error-telephone", null);
 
         if(password==null || password.isEmpty()){
             counter++;
@@ -87,30 +66,36 @@ public class Registration extends HttpServlet {
 
         if(passwordc==null || !password.equals(passwordc)){
             counter++;
-            session.setAttribute("error-repass", "Подтверждение пароля должно быть равным паролю");
+            session.setAttribute("error-repass", "Подтверждение пароля не верное");
         }
         else
             session.setAttribute("error-repass", null);
 
         if(email == null || !validate(email)){
             counter++;
-            session.setAttribute("error-email", "Email не соответствует кононом правильности");
+            session.setAttribute("error-email", "Email не соответствует требованием");
         }
         else
             session.setAttribute("error-email", null);
 
         if( counter==0 ){
             try {
-                Service conn = new Service();
-                User user = conn.saveUser(name, surname, password, email);
-                session.setAttribute("currentUser", user);
+                session.removeAttribute("error-name");
+                session.removeAttribute("error-telephone");
+                session.removeAttribute("error-pass");
+                session.removeAttribute("error-repass");
+                session.removeAttribute("error-email");
+
+                UserService conn = new UserService();
+                User user = conn.saveUser(name, password, email, telephone, address);
+                session.setAttribute("current_user", user);
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
             response.sendRedirect("/Kupon/buyer");
         } else {
-            response.sendRedirect("registration.jsp");
+            response.sendRedirect("/Kupon/login-register.jsp");
         }
     }
 

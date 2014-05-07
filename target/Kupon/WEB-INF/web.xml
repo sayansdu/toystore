@@ -22,11 +22,17 @@
       <servlet-name>AllGoods</servlet-name>
       <servlet-class>controller.admin.AllGoods</servlet-class>
   </servlet>
+
   <servlet>
-      <servlet-name>Add_good</servlet-name>
-      <servlet-class>controller.admin.AddGood</servlet-class>
+      <servlet-name>add_good</servlet-name>
+      <servlet-class>controller.admin.good.Add</servlet-class>
   </servlet>
-    <servlet>
+    <servlet-mapping>
+        <servlet-name>add_good</servlet-name>
+        <url-pattern>/admin/good/add</url-pattern>
+    </servlet-mapping>
+
+  <servlet>
       <servlet-name>Remove_good</servlet-name>
       <servlet-class>controller.admin.DeleteGood</servlet-class>
   </servlet>
@@ -68,10 +74,7 @@
       <servlet-name>AllGoods</servlet-name>
       <url-pattern>/admin</url-pattern>
   </servlet-mapping>  
-  <servlet-mapping>
-      <servlet-name>Add_good</servlet-name>
-      <url-pattern>/admin/add</url-pattern>
-  </servlet-mapping>
+
     <servlet-mapping>
       <servlet-name>Remove_good</servlet-name>
       <url-pattern>/admin/delete</url-pattern>
@@ -92,6 +95,15 @@
     <servlet-mapping>
         <servlet-name>Good_User</servlet-name>
         <url-pattern>/buyer/good</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>IndexServlet</servlet-name>
+        <servlet-class>controller.Index</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>IndexServlet</servlet-name>
+        <url-pattern>/main</url-pattern>
     </servlet-mapping>
 
 </web-app>

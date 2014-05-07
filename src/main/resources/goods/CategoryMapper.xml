@@ -1,0 +1,19 @@
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CategoryMapper">
+
+    <select id="getCategories" resultType="entity.Category">
+        select * from k_category
+    </select>
+
+    <select id="getSection" resultType="entity.Section">
+        select * from k_section
+    </select>
+
+    <select id="getCategoryById" resultType="entity.Category" parameterType="long">
+        select * from k_category where id = #{id}
+    </select>
+
+    <select id="getSectionById" resultType="entity.Section" parameterType="long">
+        select * from k_section where id = #{id}
+    </select>
+</mapper>
