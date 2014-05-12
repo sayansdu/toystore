@@ -802,3 +802,7 @@ div.form-error {
 .form-error {
     color: red;
 }
+
+div#cart_do_order{
+    float: right;
+}

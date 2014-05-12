@@ -27,7 +27,6 @@ public class Add extends HttpServlet {
 
             for(FileItem item : multiparts){
                 if(!item.isFormField() && item.getSize()!=0){
-                    System.out.println(item.getFieldName());
                     String pname = new File(item.getName()).getName();
                     File dir = new File("C:"+File.separator+"image");
                     if(!dir.exists())    dir.mkdir();
@@ -48,7 +47,6 @@ public class Add extends HttpServlet {
                     photo_dir = file.getAbsolutePath();
                     item.write(file);
                 }else {
-                    System.out.println(item.getFieldName());
                         if(item.getFieldName().equals("name")){
                             if((item.getString()).trim().isEmpty()){
                                 request.setAttribute("error-name", "Название товара не должно быть пустым");
@@ -69,7 +67,6 @@ public class Add extends HttpServlet {
                         }
                         else if(item.getFieldName().equals("category")){
                             category = new String(item.getString().getBytes("iso-8859-1"), "UTF-8");
-                            System.out.println(item.getString());
                         }
 
 
@@ -78,19 +75,15 @@ public class Add extends HttpServlet {
                         }
                         else if(item.getFieldName().equals("section")){
                             section = new String(item.getString().getBytes("iso-8859-1"), "UTF-8");
-                            System.out.println(item.getString());
                         }
                         else if(item.getFieldName().equals("producer")){
                             producer = new String(item.getString().getBytes("iso-8859-1"), "UTF-8");
-                            System.out.println(item.getString());
                         }
                         else if(item.getFieldName().equals("color")){
                             color = new String(item.getString().getBytes("iso-8859-1"), "UTF-8");
-                            System.out.println(item.getString());
                         }
                         else if(item.getFieldName().equals("size")){
                             size = new String(item.getString().getBytes("iso-8859-1"), "UTF-8");
-                            System.out.println(item.getString());
                         }
 
                 }
@@ -106,7 +99,7 @@ public class Add extends HttpServlet {
             ex.printStackTrace();
             System.out.println("something is wrong");
         }
-        response.sendRedirect("/Kupon/admin/index.jsp");
+        response.sendRedirect("/Kupon/admin/goods/all");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

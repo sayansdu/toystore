@@ -14,12 +14,18 @@
                                 for (int i = 0; i < goods.size(); i++) { %>
                             <li class="span2">
                                 <div class="product-box">
-                                    <a><img alt="" src="images/toys/toy.jpg"></a><br/>
+                                    <a><img alt="" src="<% out.print(goods.get(i).getFoto_dir()); %>"></a><br/>
                                     <a class="title"><% out.print(goods.get(i).getName()); %></a><br/>
-
                                     <p class="price">Цена: <% out.print(goods.get(i).getPrice()); %></p>
-                                    <button type="button" class="btn btn-inverse">Просмотр Изменить</button>
-                                    <button type="button" class="btn btn-danger">Удалить</button>
+
+                                    <form action="/Kupon/admin/good/update/get" method="post">
+                                        <input type="hidden" name="update_id" value="<% out.print(goods.get(i).getId()); %>">
+                                        <button type="submit" class="btn btn-inverse">Изменить</button>
+                                    </form>
+                                    <form action="/Kupon/admin/good/delete" method="post">
+                                        <input type="hidden" name="delete_id" value="<% out.print(goods.get(i).getId()); %>">
+                                        <button type="submit" class="btn btn-danger">Удалить</button>
+                                    </form>
                                 </div>
                             </li>
                             <% } %>

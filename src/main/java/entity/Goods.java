@@ -11,9 +11,9 @@ public class Goods {
     private String producer;
     private Category category;
     private Section section;
-    private String photoDirectory;
+    private String foto_dir;
     private String color;
-    private String size;
+    private String volume;
     private Date create_time;
 
     public long getId() {
@@ -38,14 +38,6 @@ public class Goods {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getPhotoDirectory() {
-        return photoDirectory;
-    }
-
-    public void setPhotoDirectory(String photoDirectory) {
-        this.photoDirectory = photoDirectory;
     }
 
     public int getPrice() {
@@ -96,12 +88,20 @@ public class Goods {
         this.color = color;
     }
 
-    public String getSize() {
-        return size;
+    public String getFoto_dir() {
+        return foto_dir;
     }
 
-    public void setSize(String size) {
-        this.size = size;
+    public void setFoto_dir(String foto_dir) {
+        this.foto_dir = foto_dir;
+    }
+
+    public String getVolume() {
+        return volume;
+    }
+
+    public void setVolume(String volume) {
+        this.volume = volume;
     }
 
 }

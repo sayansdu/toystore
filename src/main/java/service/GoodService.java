@@ -26,10 +26,10 @@ public class GoodService {
         good.setPrice(price);
         good.setCategory(categoryService.getCategoryById(category));
         good.setSection(categoryService.getSectionById(section));
-        good.setPhotoDirectory(photoDir);
+        good.setFoto_dir(photoDir);
         good.setProducer(producer);
         good.setColor(color);
-        good.setSize(size);
+        good.setVolume(size);
 
         dal.setGood(good);
     }
@@ -42,14 +42,18 @@ public class GoodService {
         return dal.getGoodsById(id);
     }
 
-    public void updateGood(long id, String name, String description, String category, int price, int amount) throws Exception {
+    public void updateGood(long id, String name, String description, int price, long category, long section, String photoDir, String producer, String color, String size) throws Exception {
         Goods good = new Goods();
         good.setId(id);
         good.setName(name);
         good.setDescription(description);
-//        good.setCategory(category);
-//        good.setPrice(price);
-//        good.setAmount(amount);
+        good.setPrice(price);
+        good.setCategory(categoryService.getCategoryById(category));
+        good.setSection(categoryService.getSectionById(section));
+        good.setFoto_dir(photoDir);
+        good.setProducer(producer);
+        good.setColor(color);
+        good.setVolume(size);
         dal.updateGood(good);
     }
 }

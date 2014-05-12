@@ -13,7 +13,7 @@ public class GoodRepository {
         List<Goods> goods;
         try
         {
-            goods =  session.selectList("UserMapper.selectGoods");
+            goods =  session.selectList("GoodMapper.selectGoods");
         } finally{
             session.close();
         }
@@ -25,7 +25,7 @@ public class GoodRepository {
         Goods goods;
         try
         {
-            goods =  session.selectOne("UserMapper.selectGoodsById", id);
+            goods =  session.selectOne("GoodMapper.selectGoodsById", id);
         } finally{
             session.close();
         }
@@ -49,7 +49,7 @@ public class GoodRepository {
         SqlSession session = SessionFactory.getSessionFactory().openSession();
         try
         {
-            session.delete("UserMapper.deleteGood", good_id);
+            session.delete("GoodMapper.deleteGood", good_id);
             session.commit();
         } catch(Exception e){
             e.printStackTrace();
@@ -62,7 +62,7 @@ public class GoodRepository {
         SqlSession session = SessionFactory.getSessionFactory().openSession();
         try
         {
-            session.update("UserMapper.updateGood", good);
+            session.update("GoodMapper.updateGood", good);
             session.commit();
         } catch(Exception e){
             e.printStackTrace();

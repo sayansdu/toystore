@@ -34,8 +34,8 @@
             <nav id="menu" class="pull-right">
                 <ul>
                     <li class="active"><a href="index.jsp">Заказы</a></li>
-                    <li><a href="products.jsp">Игрушки</a></li>
-                    <li><a href="add_product.jsp">Добавить</a></li>
+                    <li><a href="/Kupon/admin/goods/all">Игрушки</a></li>
+                    <li><a href="/Kupon/admin/add_product.jsp">Добавить</a></li>
                     <li><a href="/Kupon/Logout">Выход</a></li>
                 </ul>
             </nav>

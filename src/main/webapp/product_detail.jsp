@@ -1,3 +1,5 @@
+<%@ page import="entity.Category" %>
+<%@ page import="entity.Goods" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@include file="header.jsp"%>
 
@@ -11,32 +13,33 @@
 					<div class="span9">
 						<div class="row">
 							<div class="span4">
-								<a href="images/toys/toy.jpg" class="thumbnail" data-fancybox-group="group1" title="Описание 1"><img alt="" src="images/toys/toy.jpg"></a>												
+                                <% Goods current_good = (Goods) session.getAttribute("current_good"); %>
+								<a href="#" class="thumbnail" data-fancybox-group="group1" title="Описание 1"><img alt="" src="images/toys/toy.jpg"></a>
 								<ul class="thumbnails small">								
 									<li class="span1">
 										<a href="images/toys/toy.jpg" class="thumbnail" data-fancybox-group="group1" title="Описание 2"><img src="images/toys/toy.jpg" alt=""></a>
 									</li>								
 									<li class="span1">
 										<a href="images/toys/toy.jpg" class="thumbnail" data-fancybox-group="group1" title="Описание 3"><img src="images/toys/toy.jpg" alt=""></a>
-									</li>													
+									</li>
 									
 								</ul>
 							</div>
 							<div class="span5">
 								<address>
-									<strong>Производитель:</strong> <span>Тед</span><br>
-									<strong>Артикул:</strong> <span>45623</span><br>
-									<strong>Категория:</strong> <span>имя категории</span><br>								
+									<strong>Производитель:</strong> <span><% out.print(current_good.getProducer()); %></span><br>
+									<strong>Категория:</strong> <span><% out.print(current_good.getCategory().getValue()); %></span><br>
 								</address>				
-								<h4><strong>Название игрушки</strong></h4>					
-								<h4><strong>Цена: 5000 тг</strong></h4>
+								<h4><strong><% out.print(current_good.getName()); %></strong></h4>
+								<h4><strong>Цена: <% out.print(current_good.getPrice()); %> тг</strong></h4>
 							</div>
 							<div class="span5">
-								<form class="form-inline">
+								<form class="form-inline" action="/Kupon/order/before/get" method="get">
 									
 									<label>Количество:</label>
-									<input type="text" class="span1" placeholder="1">
-									<button class="btn btn-inverse" type="submit">В корзину</button>
+									<input type="text" class="span1" placeholder="1" name="selected_order_good_count" value="1">
+                                    <input type="hidden" name="selected_order_good_id" value="<% out.print(current_good.getId()); %>">
+									<button class="btn btn-inverse" type="submit" onclick="add_to_bucket()">В корзину</button>
 								</form>
 							</div>							
 						</div>
@@ -48,22 +51,18 @@
 								</ul>							 
 								<div class="tab-content">
 									<div class="tab-pane active" id="home">
-										Этот пупс Ненуко нуждается в вашей заботе. Смените малышке подгузники, используйте детскую присыпку, поиграйте с пупсом, напоите кукольного ребенка и дайте ему соску. Пупс Ненуко с аксессуарами по уходу – отличный подарок для девочки, которая любит играть в «дочки-матери».
-
-Теперь игра стала еще интереснее и удобнее. Вы можете отправиться со своим пупсом в гости или на прогулку и продолжать заботиться о нем. Ведь все многочисленные аксессуары помещаются в удобный и красивый голубой рюкзачок.
-
-В коробке вы найдете: пупса Ненуко в топике с розовой отделкой, рюкзачок для девочки, пачку подгузников, игрушечного медвежонка, соску, присыпку, крем, детскую бутылочку и другие аксессуары.
+										<% out.print(current_good.getDescription()); %>
 									</div>
 									<div class="tab-pane" id="profile">
 										<table class="table table-striped shop_attributes">	
 											<tbody>
 												<tr class="">
 													<th>Размеры:</th>
-													<td>80 см, 120 см, 150 см</td>
+													<td><% out.print(current_good.getVolume()); %></td>
 												</tr>		
 												<tr class="alt">
 													<th>Цвета:</th>
-													<td>Белый, Серый</td>
+													<td><% out.print(current_good.getColor()); %></td>
 												</tr>
 											</tbody>
 										</table>
@@ -138,26 +137,22 @@
 						</div>
 						<div class="block">	
 							<ul class="nav nav-list">
-								<li class="nav-header"><u>Категории</u></li>
-								<li><a href="products.jsp">Куклы и аксессуары для кукол</a></li>
-								<li><a href="products.jsp">Транспортные средства</a></li>
-								<li><a href="products.jsp">Интерактивные игрушки</a></li>
-								<li><a href="products.jsp">Фигурки героев</a></li>
-								<li><a href="products.jsp">Оружие и наборы для стрельбы</a></li>
-								<li><a href="products.jsp">Игрушки для мальчиков</a></li>
-								<li><a href="products.jsp">Игровые наборы с популярными персонажами</a></li>
-								<li><a href="products.jsp">Мягкая игрушка</a></li>
-								<li><a href="products.jsp">Конструкторы</a></li>
-								<li><a href="products.jsp">Игрушки для девочек</a></li>
+                                <li class="nav-header"><u>Категории</u></li>
+
+                                <%  List<Category> categories = (List<Category>) session.getAttribute("categories");
+                                    for (int i = 0; i < categories.size(); i++) {
+                                %>
+                                <li><a href="products.jsp"><% out.println(categories.get(i).getValue()); %></a></li>
+                                <% } %>
 							</ul>
 							<br/>
 							<ul class="nav nav-list below">
-								<li class="nav-header"><u>Интересное</u></li>
-								<li><a href="products.jsp">Новое поступление</a></li>
-								<li><a href="products.jsp">Для мальчиков</a></li>
-								<li><a href="products.jsp">Для девочек</a></li>
-								<li><a href="products.jsp">Распродажа</a></li>
-								<li><a href="products.jsp">Акции</a></li>
+                                <li class="nav-header"><u>Интересное</u></li>
+                                <%
+                                    for (int i = 0; i < sections.size(); i++) {
+                                %>
+                                <li><a href="products.jsp"><% out.println(sections.get(i).getValue()); %></a></li>
+                                <% } %>
 							</ul>
 						</div>
 						<div class="block">
@@ -200,6 +195,7 @@
 						</div>
 
 				</div>
+                    </div>
 			</section>
 
 <%@include file="footer.jsp"%>

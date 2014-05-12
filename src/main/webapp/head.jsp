@@ -22,5 +22,6 @@
     <script src="/Kupon/bootstrap/js/bootstrap.min.js"></script>
     <script src="/Kupon/js/superfish.js"></script>
     <script src="/Kupon/js/jquery.scrolltotop.js"></script>
+    <script src="/Kupon/js/bucket.js"></script>
 
 </head>

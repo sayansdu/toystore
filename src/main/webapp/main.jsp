@@ -4,7 +4,6 @@
 <%@ page import="entity.Section" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@include file="header.jsp"%>
-
 			<section  class="homepage-slider" id="home-slider">
 				<div class="flexslider">
 					<ul class="slides">
@@ -40,13 +39,13 @@
                                 for (int i = 0; i < goods.size(); i++) {
                             %>
                             <li class="span2">
-                                <div class="product-box">
-                                    <a href="product_detail.jsp"><img alt="" src="images/toys/toy.jpg"></a><br/>
-                                    <a href="product_detail.jsp" class="title"><% out.println(goods.get(i).getName()); %></a><br/>
+                                <div class="product-box" onclick="">
+                                    <a href="/Kupon/good/get?id=<% out.print(goods.get(i).getId()); %>"><img alt="" src="images/toys/toy.jpg"></a><br/>
+                                    <a href="/Kupon/good/get?id=<% out.print(goods.get(i).getId()); %>" class="title"><% out.println(goods.get(i).getName()); %></a><br/>
                                     Количество <input type="number" name="book_qty" value="1"  class="input-small">
-                                    <p class="price">Цена: <% out.println(goods.get(i).getPrice()); %></p>
+                                    <p class="price">Цена: <% out.print(goods.get(i).getPrice()); %></p>
 
-                                    <button type="button" class="btn btn-default">В корзину</button>
+                                    <button type="button" class="btn btn-default" onclick="add_to_bucket()">В корзину</button>
                                 </div>
                             </li>
                             <% } %>
@@ -68,7 +67,7 @@
 					<div class="span3 col">
 						<div class="block">
 							<ul class="nav nav-list">
-							Корзина сюда
+                                <a href="korzina.jsp">Корзина</a>
 							</ul>
 						</div>
 						<div class="block">	
@@ -121,7 +120,7 @@
 													<a href="product_detail.jsp" class="title">Имя</a><br/>
 													Количество <input type="number" name="book_qty" value="1"  class="input-small">
 													<p class="price">Цена</p>
-													<button type="button" class="btn btn-default">В корзину</button>
+													<button type="button" class="btn btn-default" onclick="bucket()">В корзину</button>
 												</div>
 											</li>
 										</ul>

@@ -8,44 +8,34 @@
 			<section class="main-content">
 				
 				<div class="row">						
-					<div class="span9">								
-						<ul class="thumbnails listing-products">
-										<form method="get" action="buy_process.php">
-										<ul>
-							            <div class="product-box">
-							            <span class="remove-itm" style="float:right;padding-right:10px;">&times</a></span>
-										<h4 style="padding-top:5px;">Имя</h4> 
-							            <div class="p-qty">Количество: х шт</div>
-										<div class="p-price">Цена: хххх тг</div>
-										<button class="btn btn-inverse" id="submit" >Купить</button>&nbsp;
-										</div>
-										</ul>
-										</form> 
-										<form method="get" action="buy_process.php">
-										<ul>
-							            <div class="product-box">
-							            <span class="remove-itm" style="float:right;padding-right:10px;">&times</a></span>
-										<h4 style="padding-top:5px;">Имя</h4> 
-							            <div class="p-qty">Количество: х шт</div>
-										<div class="p-price">Цена: хххх тг</div>
-										<button class="btn btn-inverse" id="submit" >Купить</button>&nbsp;
-										</div>
-										</ul>
-										</form> 
-							
-						</ul>								
-						<hr>
-						<div class="pagination pagination-small pagination-centered">
-							<ul>
-								<li><a href="#">Пред</a></li>
-								<li class="active"><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">След</a></li>
-							</ul>
-						</div>
+					<div class="span9">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Категория</th>
+                                <th>Наименование игрушки</th>
+                                <th>Цена</th>
+                                <th>Кол.</th>
+                                <th>Общая сумма</th>
 
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr>
+                                <td>blah</td>
+                                <td>blah</td>
+                                <td>blah</td>
+                                <td>blah</td>
+                                <td>10 000</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="row" id="cart_do_order">
+                                <form class="form-inline" action="/Kupon/order/before/get" method="get">
+                                    <button class="btn btn-inverse" type="submit">Оформить заказ</button>
+                                </form>
+                        </div>
 					</div>
 					<div class="span3 col">
 						<div class="block">
