@@ -7,9 +7,9 @@ public class Order {
 
     private long id;
     private User buyer;
-    private List<Order_good> goods;
+    private List<OrderBefore> goods;
     private Date create_time;
-    private Boolean paid;
+    private int paid;
 
     public long getId() {
         return id;
@@ -27,11 +27,11 @@ public class Order {
         this.buyer = buyer;
     }
 
-    public List<Order_good> getGoods() {
+    public List<OrderBefore> getGoods() {
         return goods;
     }
 
-    public void setGoods(List<Order_good> goods) {
+    public void setGoods(List<OrderBefore> goods) {
         this.goods = goods;
     }
 
@@ -43,11 +43,11 @@ public class Order {
         this.create_time = create_time;
     }
 
-    public Boolean getPaid() {
+    public int getPaid() {
         return paid;
     }
 
-    public void setPaid(Boolean paid) {
+    public void setPaid(int paid) {
         this.paid = paid;
     }
 }

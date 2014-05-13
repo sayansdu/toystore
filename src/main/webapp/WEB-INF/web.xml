@@ -123,4 +123,31 @@
         <servlet-name>GetGoodBefore</servlet-name>
         <url-pattern>/order/before/get</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AddOrder</servlet-name>
+        <servlet-class>controller.order.after.Save</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddOrder</servlet-name>
+        <url-pattern>/order/save</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>SetGoodtoBucket</servlet-name>
+        <servlet-class>controller.order.before.Set</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SetGoodtoBucket</servlet-name>
+        <url-pattern>/order/before/set/bucket</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>DeleteFromBucket</servlet-name>
+        <servlet-class>controller.order.before.Delete</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteFromBucket</servlet-name>
+        <url-pattern>/order/before/delete</url-pattern>
+    </servlet-mapping>
 </web-app>

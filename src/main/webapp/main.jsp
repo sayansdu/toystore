@@ -45,7 +45,7 @@
                                     Количество <input type="number" name="book_qty" value="1"  class="input-small">
                                     <p class="price">Цена: <% out.print(goods.get(i).getPrice()); %></p>
 
-                                    <button type="button" class="btn btn-default" onclick="add_to_bucket()">В корзину</button>
+                                    <button type="button" class="btn btn-default" onclick="add_to_bucket(<% out.print(goods.get(i).getId()); %>, <% out.print(i); %>)">В корзину</button>
                                 </div>
                             </li>
                             <% } %>

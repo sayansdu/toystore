@@ -1,10 +1,16 @@
 package entity;
 
-public class Order_good {
+public class OrderBefore {
 
     private Goods goods;
     private Order orders;
-    private int count;
+    private int amount;
+
+    public OrderBefore(){
+        amount = 0;
+        goods = new Goods();
+    }
+
 
     public Goods getGoods() {
         return goods;
@@ -22,11 +28,11 @@ public class Order_good {
         this.orders = orders;
     }
 
-    public int getCount() {
-        return count;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 }

@@ -1,3 +1,7 @@
+<%@ page import="entity.Goods" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.Set" %>
+<%@ page import="entity.OrderBefore" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@include file="header.jsp"%>
 
@@ -17,24 +21,48 @@
                                 <th>Цена</th>
                                 <th>Кол.</th>
                                 <th>Общая сумма</th>
+                                <th>Удалить</th>
 
                             </tr>
                             </thead>
-
                             <tbody>
-                            <tr>
-                                <td>blah</td>
-                                <td>blah</td>
-                                <td>blah</td>
-                                <td>blah</td>
-                                <td>10 000</td>
-                            </tr>
+                            <%
+                                Map<Integer, OrderBefore> goods_map =  (Map<Integer, OrderBefore>) session.getAttribute("goods_map");
+
+                                if(goods_map!=null && goods_map.size()>0) {
+                                    Set<Integer> keys =  goods_map.keySet();
+
+                                    for (Integer key : keys) {
+                                        Integer amount = goods_map.get(key).getAmount();
+                            %>
+                                <tr>
+                                    <td><% out.print(goods_map.get(key).getGoods().getCategory().getValue()); %></td>
+                                    <td><% out.print(goods_map.get(key).getGoods().getName()); %></td>
+                                    <td><% out.print(goods_map.get(key).getGoods().getPrice()); %> тг</td>
+                                    <td><% out.print(amount); %></td>
+                                    <td><% out.print((amount*goods_map.get(key).getGoods().getPrice())); %> тг</td>
+                                    <td>
+                                        <form class="form-inline" action="/Kupon/order/before/delete" method="get">
+                                            <input type="hidden" name="selected_order_delete_id" value="<% out.print(key); %>">
+                                            <button class="btn btn-inverse" type="submit" onclick="">Удалить</button>
+                                        </form>
+
+
+                                </tr>
+                            <%      }
+                                }
+                            %>
+
                             </tbody>
                         </table>
                         <div class="row" id="cart_do_order">
-                                <form class="form-inline" action="/Kupon/order/before/get" method="get">
+                                <% if(session.getAttribute("current_user")!=null) { %>
+                                <form class="form-inline" action="/Kupon/order/save" method="get">
                                     <button class="btn btn-inverse" type="submit">Оформить заказ</button>
                                 </form>
+                                <% } else { %>
+                                   <b>Чтобы оформить заказ, сначало вы должны авторизоватся</b>
+                                <% } %>
                         </div>
 					</div>
 					<div class="span3 col">

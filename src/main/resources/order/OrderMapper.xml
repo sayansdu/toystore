@@ -1,0 +1,26 @@
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OrderMapper">
+
+    <insert id="insert_order" parameterType="entity.Order">
+      insert into k_order (buyer, paid) values(
+      #{buyer.id, jdbcType=INTEGER, mode=IN},
+      #{paid, jdbcType=INTEGER, mode=IN} )
+    </insert>
+
+    <insert id="insert_order_good" parameterType="entity.OrderBefore">
+        insert into order_good (orders, goods, amount) values(
+          #{orders.id, jdbcType=INTEGER, mode=IN},
+          #{goods.id, jdbcType=INTEGER, mode=IN},
+          #{amount, jdbcType=INTEGER, mode=IN} )
+    </insert>
+
+    <select id="lastOrderId" resultType="entity.Order">
+        SELECT * FROM k_order WHERE ROWNUM &lt;= 1 ORDER BY id DESC
+    </select>
+    <select id="getOrderById" parameterType="integer" resultType="entity.Order">
+        select * from k_order where id = #{id}
+    </select>
+
+
+
+</mapper>

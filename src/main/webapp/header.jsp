@@ -29,7 +29,7 @@
                     <li><a href="cart.jsp">Корзина</a></li>
                     <li><a href="/Kupon/Logout">Выход</a></li>
                     <% } else {%>
-                    <li><a href="cart.jsp">Корзина</a></li>
+                    <li><a href="/Kupon/order/before/get">Корзина</a></li>
                     <li><a href="login-register.jsp">Вход/Регистрация</a></li>
                     <% } %>
 

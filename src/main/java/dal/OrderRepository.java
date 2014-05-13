@@ -1,46 +1,17 @@
 package dal;
 
 import connection.SessionFactory;
-import entity.Goods;
+import entity.Order;
+import entity.OrderBefore;
 import org.apache.ibatis.session.SqlSession;
 
-import java.util.List;
+public class OrderRepository {
 
-public class GoodRepository {
-
-    public GoodRepository(){
-
-    }
-
-    public List<Goods> getGoods(){
-        SqlSession session = SessionFactory.getSessionFactory().openSession();
-        List<Goods> goods;
-        try
-        {
-            goods =  session.selectList("GoodMapper.selectGoods");
-        } finally{
-            session.close();
-        }
-        return goods;
-    }
-
-    public Goods getGoodsById(long id){
-        SqlSession session = SessionFactory.getSessionFactory().openSession();
-        Goods goods;
-        try
-        {
-            goods =  session.selectOne("GoodMapper.selectGoodsById", id);
-        } finally{
-            session.close();
-        }
-        return goods;
-    }
-
-    public void setGood(Goods good){
+    public void saveOrder(Order order){
         SqlSession session = SessionFactory.getSessionFactory().openSession();
         try
         {
-            session.insert("GoodMapper.insertGood", good);
+            session.insert("OrderMapper.insert_order", order);
             session.commit();
         } catch(Exception e){
             e.printStackTrace();
@@ -49,11 +20,40 @@ public class GoodRepository {
         }
     }
 
-    public void deleteGood(long good_id){
+    public Order getLastOrder(){
+        SqlSession session = SessionFactory.getSessionFactory().openSession();
+        Order order = new Order();
+        try
+        {
+            order = session.selectOne("OrderMapper.lastOrderId");
+        } catch(Exception e){
+            e.printStackTrace();
+        } finally{
+            session.close();
+        }
+        return order;
+    }
+
+    public Order getOrderById(long id){
+        SqlSession session = SessionFactory.getSessionFactory().openSession();
+        Order order = new Order();
+        try
+        {
+            order = session.selectOne("OrderMapper.getOrderById");
+            session.commit();
+        } catch(Exception e){
+            e.printStackTrace();
+        } finally{
+            session.close();
+        }
+        return order;
+    }
+
+    public void saveOrderBefore(OrderBefore orderBefore){
         SqlSession session = SessionFactory.getSessionFactory().openSession();
         try
         {
-            session.delete("GoodMapper.deleteGood", good_id);
+            session.insert("OrderMapper.insert_order_good", orderBefore);
             session.commit();
         } catch(Exception e){
             e.printStackTrace();
@@ -61,19 +61,4 @@ public class GoodRepository {
             session.close();
         }
     }
-
-    public void updateGood(Goods good){
-        SqlSession session = SessionFactory.getSessionFactory().openSession();
-        try
-        {
-            session.update("GoodMapper.updateGood", good);
-            session.commit();
-        } catch(Exception e){
-            e.printStackTrace();
-        } finally{
-            session.close();
-        }
-    }
-
-
 }
