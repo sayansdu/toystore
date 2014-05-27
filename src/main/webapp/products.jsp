@@ -62,7 +62,7 @@
 							
 						</ul>								
 						<hr>
-						<div class="pagination pagination-small pagination-centered">
+						<%--<div class="pagination pagination-small pagination-centered">
 							<ul>
 								<li><a href="#">Пред</a></li>
 								<li class="active"><a href="#">1</a></li>
@@ -71,38 +71,17 @@
 								<li><a href="#">4</a></li>
 								<li><a href="#">След</a></li>
 							</ul>
-						</div>
+						</div>--%>
 
 					</div>
 					<div class="span3 col">
-						<div class="block">
+						<%--<div class="block">
 							<ul class="nav nav-list">
 							Корзина сюда
 							</ul>
-						</div>
+						</div>--%>
 						<div class="block">	
-							<ul class="nav nav-list">
-								<li class="nav-header"><u>Категории</u></li>
-								<li><a href="products.jsp">Куклы и аксессуары для кукол</a></li>
-								<li><a href="products.jsp">Транспортные средства</a></li>
-								<li><a href="products.jsp">Интерактивные игрушки</a></li>
-								<li><a href="products.jsp">Фигурки героев</a></li>
-								<li><a href="products.jsp">Оружие и наборы для стрельбы</a></li>
-								<li><a href="products.jsp">Игрушки для мальчиков</a></li>
-								<li><a href="products.jsp">Игровые наборы с популярными персонажами</a></li>
-								<li><a href="products.jsp">Мягкая игрушка</a></li>
-								<li><a href="products.jsp">Конструкторы</a></li>
-								<li><a href="products.jsp">Игрушки для девочек</a></li>
-							</ul>
-							<br/>
-							<ul class="nav nav-list below">
-								<li class="nav-header"><u>Интересное</u></li>
-								<li><a href="products.jsp">Новое поступление</a></li>
-								<li><a href="products.jsp">Для мальчиков</a></li>
-								<li><a href="products.jsp">Для девочек</a></li>
-								<li><a href="products.jsp">Распродажа</a></li>
-								<li><a href="products.jsp">Акции</a></li>
-							</ul>
+							<%@include file="right_menu.jsp"%>
 						</div>
 						<div class="block">
 							<h4 class="title">

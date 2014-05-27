@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Set;
 
 public class Save extends HttpServlet {
 
@@ -30,15 +31,15 @@ public class Save extends HttpServlet {
 
             Order lastOrder = orderService.getLastOrder();
             Map<Integer, OrderBefore> goods_map =  (Map<Integer, OrderBefore>) session.getAttribute("goods_map");
-            java.util.Set<Integer> keys =  goods_map.keySet();
+            Set<Integer> keys =  goods_map.keySet();
             for (Integer key : keys) {
                 OrderBefore orderBefore = goods_map.get(key);
                 orderBefore.setOrder(lastOrder);
                 orderService.saveOrderBefore(orderBefore);
-                goods_map.remove(key);
+        //        goods_map.remove(key);
             }
             session.removeAttribute("goods_map");
-            session.setAttribute("goods_map", goods_map);
+    //        session.setAttribute("goods_map", goods_map);
 
 
         } catch( Exception e){

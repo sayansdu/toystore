@@ -4,6 +4,8 @@ import dal.OrderRepository;
 import entity.Order;
 import entity.OrderBefore;
 
+import java.util.List;
+
 public class OrderService {
 
     GoodService goodService;
@@ -32,4 +34,15 @@ public class OrderService {
         return orderRepository.getOrderById(id);
     }
 
+    public List<Order> getOrdersByUser(long user_id){
+        return orderRepository.getOrdersByUser(user_id);
+    }
+
+    public List<Order> getOrders(){
+        return orderRepository.getOrders();
+    }
+
+    public List<OrderBefore> getOrderDetails(long user_id){
+        return orderRepository.getOrderDetails(user_id);
+    }
 }

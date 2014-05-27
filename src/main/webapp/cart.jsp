@@ -36,14 +36,14 @@
                                         Integer amount = goods_map.get(key).getAmount();
                             %>
                                 <tr>
-                                    <td><% out.print(goods_map.get(key).getGoods().getCategory().getValue()); %></td>
-                                    <td><% out.print(goods_map.get(key).getGoods().getName()); %></td>
-                                    <td><% out.print(goods_map.get(key).getGoods().getPrice()); %> тг</td>
-                                    <td><% out.print(amount); %></td>
-                                    <td><% out.print((amount*goods_map.get(key).getGoods().getPrice())); %> тг</td>
+                                    <td><%= (goods_map.get(key).getGoods().getCategory().getValue()) %></td>
+                                    <td><%= (goods_map.get(key).getGoods().getName()) %></td>
+                                    <td><%= (goods_map.get(key).getGoods().getPrice()) %> тг</td>
+                                    <td><%= (amount) %></td>
+                                    <td><%= ((amount*goods_map.get(key).getGoods().getPrice())) %> тг</td>
                                     <td>
                                         <form class="form-inline" action="/Kupon/order/before/delete" method="get">
-                                            <input type="hidden" name="selected_order_delete_id" value="<% out.print(key); %>">
+                                            <input type="hidden" name="selected_order_delete_id" value="<%= (key) %>">
                                             <button class="btn btn-inverse" type="submit" onclick="">Удалить</button>
                                         </form>
 

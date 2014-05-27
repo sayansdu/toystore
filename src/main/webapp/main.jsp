@@ -37,21 +37,37 @@
 						<ul class="thumbnails listing-products">
                             <%  List<Goods> goods = (List<Goods>) session.getAttribute("goods");
                                 for (int i = 0; i < goods.size(); i++) {
+                                    if(goods.get(i).getImage()!=null) {
+
+
                             %>
                             <li class="span2">
                                 <div class="product-box" onclick="">
-                                    <a href="/Kupon/good/get?id=<% out.print(goods.get(i).getId()); %>"><img alt="" src="images/toys/toy.jpg"></a><br/>
-                                    <a href="/Kupon/good/get?id=<% out.print(goods.get(i).getId()); %>" class="title"><% out.println(goods.get(i).getName()); %></a><br/>
-                                    Количество <input type="number" name="book_qty" value="1"  class="input-small">
-                                    <p class="price">Цена: <% out.print(goods.get(i).getPrice()); %></p>
+                                    <a href="/Kupon/good/get?id=<%=(goods.get(i).getId()) %>"><img alt="" src="getImage.jsp?img_id=<%= goods.get(i).getId() %>" /></a><br/>
+                                    <a href="/Kupon/good/get?id=<%=(goods.get(i).getId()) %>" class="title"><%=(goods.get(i).getName()) %></a><br/>
+                                    Количество <input type="number" name="book_qty" value="1" class="input-small">
+                                    <p class="price">Цена: <%=(goods.get(i).getPrice()) %></p>
 
-                                    <button type="button" class="btn btn-default" onclick="add_to_bucket(<% out.print(goods.get(i).getId()); %>, <% out.print(i); %>)">В корзину</button>
+                                    <button type="button" class="btn btn-default" onclick="add_to_bucket(<%=(goods.get(i).getId()) %>, <%=(i) %>)">В корзину</button>
                                 </div>
                             </li>
-                            <% } %>
+                                <% } else { %>
+                            <li class="span2">
+                                <div class="product-box" onclick="">
+                                    <a href="/Kupon/good/get?id=<%=(goods.get(i).getId()) %>"><img alt="" src="<%= goods.get(i).getFoto_dir() %>"></a><br/>
+                                    <a href="/Kupon/good/get?id=<%=(goods.get(i).getId()) %>" class="title"><%= (goods.get(i).getName()) %></a><br/>
+                                    Количество <input type="number" name="book_qty" value="1" class="input-small">
+                                    <p class="price">Цена: <%=(goods.get(i).getPrice()) %></p>
+
+                                    <button type="button" class="btn btn-default" onclick="add_to_bucket(<%=(goods.get(i).getId()) %>, <%= (i) %>)">В корзину</button>
+                                </div>
+                            </li>
+                            <%      }
+                                }
+                            %>
 
 						</ul>
-						<hr>
+						<%--<hr>
 						<div class="pagination pagination-small pagination-centered">
 							<ul>
 								<li><a href="#">Пред</a></li>
@@ -61,35 +77,19 @@
 								<li><a href="#">4</a></li>
 								<li><a href="#">След</a></li>
 							</ul>
-						</div>
+						</div>--%>
 
 					</div>
 					<div class="span3 col">
-						<div class="block">
+						<%--<div class="block">
 							<ul class="nav nav-list">
                                 <a href="korzina.jsp">Корзина</a>
 							</ul>
+						</div>--%>
+						<div class="block">
+                            <%@include file="right_menu.jsp"%>
 						</div>
-						<div class="block">	
-							<ul class="nav nav-list">
-                                <li class="nav-header"><u>Категории</u></li>
 
-                                <%  List<Category> categories = (List<Category>) session.getAttribute("categories");
-                                    for (int i = 0; i < categories.size(); i++) {
-                                %>
-								<li><a href="products.jsp"><% out.println(categories.get(i).getValue()); %></a></li>
-                                <% } %>
-							</ul>
-							<br/>
-							<ul class="nav nav-list below">
-								<li class="nav-header"><u>Интересное</u></li>
-                                <%
-                                    for (int i = 0; i < sections.size(); i++) {
-                                %>
-                                <li><a href="products.jsp"><% out.println(sections.get(i).getValue()); %></a></li>
-                                <% } %>
-							</ul>
-						</div>
 						<div class="block">
 							<h4 class="title">
 								<span class="pull-left"><span class="text">Разное</span></span>

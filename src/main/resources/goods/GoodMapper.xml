@@ -22,7 +22,7 @@
         select * from k_goods where id = #{id}
     </select>
     <insert id="insertGood" parameterType="entity.Goods">
-      insert into k_goods (name, description, price, category, section, foto_dir, producer, color, volume) values(
+      insert into k_goods (name, description, price, category, section, foto_dir, producer, color, volume, image) values(
       #{name, jdbcType=VARCHAR, mode=IN},
       #{description, jdbcType=VARCHAR, mode=IN},
       #{price, jdbcType=INTEGER, mode=IN},
@@ -31,7 +31,8 @@
       #{foto_dir, jdbcType=VARCHAR, mode=IN},
       #{producer, jdbcType=VARCHAR, mode=IN},
       #{color, jdbcType=VARCHAR, mode=IN},
-      #{size, jdbcType=VARCHAR, mode=IN}
+      #{volume, jdbcType=VARCHAR, mode=IN},
+      #{image, jdbcType=BLOB, mode=IN}
       )
     </insert>
     <delete id="deleteGood" parameterType="long">
@@ -47,7 +48,8 @@
           foto_dir = #{foto_dir},
           producer = #{producer},
           color = #{color},
-          volume = #{volume}
+          volume = #{volume},
+          image = #{image}
           where id = #{id}
     </update>
 
@@ -57,6 +59,17 @@
 
     <select id="getSectionById" resultType="entity.Section" parameterType="long">
         select * from k_section where id = #{id}
+    </select>
+
+    <insert id="saveImage" parameterType="entity.K_Image">
+      insert into k_image (image, path) values (
+        #{image, jdbcType=BLOB, mode=IN},
+        #{path, jdbcType=VARCHAR, mode=IN}
+      )
+    </insert>
+
+    <select id="getImage" resultType="entity.K_Image">
+        select * from k_image where ROWNUM &lt;= 1
     </select>
 
 </mapper>

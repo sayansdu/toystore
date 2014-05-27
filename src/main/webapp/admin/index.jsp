@@ -1,3 +1,5 @@
+<%@ page import="entity.Order" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@include file="header.jsp"%>
 
@@ -11,28 +13,37 @@
 						<table class="table">
                                       <thead>
                                         <tr>
-                                          <th>Номер заказа</th>
-                                          <th>ID Пользователя</th>
-                                          <th>ID книги</th>
-                                          <th>Наименование игрушки</th>
-                                          <th>Цена</th>
-                                          <th>Кол.</th>
-                                          <th>Общая сумма</th>
-                                          <th>Статус</th>
+                                            <th>Покупатель</th>
+                                            <th>Продукты/Товары</th>
+                                            <th>Время заказа</th>
+                                           <%-- <th>Общая сумма</th>--%>
+                                            <th>Оплачено/Доставлено</th>
                                         </tr>
                                       </thead>
                                    
                                         <tbody>
+                                        <% List<Order> orders = (List<Order>) session.getAttribute("all_orders");
+                                            for (int i = 0; i < orders.size(); i++) {
+                                        %>
                                             <tr>
-                                              <td>3</td>
-                                              <td>4</td>
-                                              <td>44</td>
-                                              <td>имя </td>
-                                              <td>555</td>
-                                              <td>2</td>
-                                              <td>1110</td>
-                                              <td><input type="checkbox" checked></td>
+                                              <td><%= orders.get(i).getBuyer().getName() %></td>
+                                              <td><a href="/Kupon/admin/order/details?order_id=<%= orders.get(i).getId() %>">Подробнее</a></td>
+                                              <td>
+                                                  <% SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+                                                      String date =  format.format(orders.get(i).getCreate_time());
+                                                  %>
+                                                  <%= date %>
+                                              </td>
+                                              <%--<td>
+                                                $$$
+                                              </td>--%>
+                                              <% if(orders.get(i).getPaid()==1){ %>
+                                                <td><input type="checkbox" checked></td>
+                                              <% } else { %>
+                                                <td><input type="checkbox" ></td>
+                                              <% } %>
                                             </tr>
+                                        <% } %>
                                         </tbody>
                                           
                                   

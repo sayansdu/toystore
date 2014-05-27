@@ -47,13 +47,13 @@ public class Login extends HttpServlet {
 
                 session.setAttribute("current_user", user);
                 if(user.getStatus().equals("admin")){
-                    response.sendRedirect("admin");
+                    response.sendRedirect("/Kupon/admin/cabinet");
                 }
 
                 else if(user.getStatus().equals("courier"))
-                    response.sendRedirect("courier/index.jsp");
+                    response.sendRedirect("admin/courier.jsp");
                 else
-                    response.sendRedirect("buyer");
+                    response.sendRedirect("/Kupon/buyer");
 
             } else {
                 session.setAttribute("login-error", "Email или пароль неправильно введен");

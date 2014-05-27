@@ -15,19 +15,19 @@
                                             <% Goods good = (Goods) session.getAttribute("updating_object");%>
 											<form action="/Kupon/admin/good/update/save" method="post" enctype="multipart/form-data">
 											<div class="span6">
-                                                <input type="hidden" name="id" value="<% out.print(good.getId());%>">
-                                                <input type="hidden" name="foto_dir" value="<% out.print(good.getFoto_dir());%>">
+                                                <input type="hidden" name="id" value="<%=(good.getId())%>">
+                                                <input type="hidden" name="foto_bytes" value="<%=(good.getImage())%>">
 												<div class="control-group">
 													<label class="control-label">Наименование:</label>
 													<div class="controls">
-                                                        <input type="text"  class="input-xlarge" name="name" value="<% out.print(good.getName()); %>" required>
+                                                        <input type="text"  class="input-xlarge" name="name" value="<%=(good.getName()) %>" required>
 													</div>
 												</div>
 															  
 												<div class="control-group">
 													<label class="control-label">Цена:</label>
 													<div class="controls">
-                                                        <input type="text"  class="input-xlarge" name="price" value="<% out.print(good.getPrice()); %>" required>
+                                                        <input type="text"  class="input-xlarge" name="price" value="<%= (good.getPrice()) %>" required>
 													</div>
 												</div>
 												<div class="control-group">
@@ -35,7 +35,7 @@
 													<div class="controls">
 
 														<textarea id="ckeditor_full"  rows="5" cols="55" name="description" required>
-                                                            <% out.print(good.getDescription()); %>
+                                                            <%= (good.getDescription()) %>
 														</textarea>
 													</div>
 												</div>
@@ -45,7 +45,7 @@
 												<div class="control-group">
 													<label class="control-label">Загрузка фото:</label>
 													<div class="controls">
-														<input type="file" name="photo" value="<% out.print(good.getFoto_dir()); %>"><br>
+														<input type="file" name="photo" value="<%= (good.getFoto_dir()) %>"><br>
 													</div>
 												</div>
 												<div class="control-group">
@@ -57,9 +57,9 @@
                                                                 for (int i = 0; i < categories.size(); i++) {
                                                                     if(good.getCategory().getId() == categories.get(i).getId()){
                                                             %>
-                                                            <option value="<% out.print(categories.get(i).getId()); %>" selected><% out.println(categories.get(i).getValue()); %></option>
+                                                            <option value="<%=(categories.get(i).getId()) %>" selected><%= (categories.get(i).getValue()) %></option>
                                                             <% } else { %>
-                                                            <option value="<% out.print(categories.get(i).getId()); %>"><% out.println(categories.get(i).getValue()); %></option>
+                                                            <option value="<%=(categories.get(i).getId()) %>"><%= (categories.get(i).getValue()) %></option>
                                                             <%      }
                                                                 }
                                                             %>
@@ -76,9 +76,9 @@
                                                                 for (int i = 0; i < sections.size(); i++) {
                                                                     if(good.getSection().getId() == sections.get(i).getId()){
                                                             %>
-                                                            <option value="<% out.print(sections.get(i).getId()); %>" selected><% out.println(sections.get(i).getValue()); %></option>
+                                                            <option value="<%= (sections.get(i).getId()) %>" selected><%= (sections.get(i).getValue()) %></option>
                                                                     <%} else { %>
-                                                            <option value="<% out.print(sections.get(i).getId()); %>"><% out.println(sections.get(i).getValue()); %></option>
+                                                            <option value="<%= (sections.get(i).getId()) %>"><%= (sections.get(i).getValue()) %></option>
                                                             <%      }
                                                                 }
                                                             %>
@@ -88,20 +88,20 @@
 												<div class="control-group">
 													<label class="control-label">Производитель:  </label>
 													<div class="controls">
-                                                        <input type="text"  placeholder="" class="input-xlarge" name="producer" value="<% out.print(good.getProducer()); %>" required>
+                                                        <input type="text"  placeholder="" class="input-xlarge" name="producer" value="<%= (good.getProducer()) %>" required>
 													</div>
 												</div>
 												<div class="control-group">
 													<label class="control-label">Цвета:</label>
 													<div class="controls">
-                                                        <input type="text"  placeholder="" class="input-xlarge" name="color" value="<% out.print(good.getColor()); %>" required>
+                                                        <input type="text"  placeholder="" class="input-xlarge" name="color" value="<%= (good.getColor()) %>" required>
 													</div>
 												</div>
 												
 												<div class="control-group">
 													<label class="control-label">Размер (высота х ширина):</label>
 													<div class="controls">
-                                                        <input type="text" placeholder=""  class="input-xlarge" name="size" value="<% out.print(good.getVolume()); %>" required>
+                                                        <input type="text" placeholder=""  class="input-xlarge" name="size" value="<%= (good.getVolume()) %>" required>
 													</div>
 												</div>
 												

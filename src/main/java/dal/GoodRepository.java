@@ -9,7 +9,7 @@ import java.util.List;
 public class GoodRepository {
 
     public GoodRepository(){
-
+     //   Locale.setDefault(new Locale("en", "US"));
     }
 
     public List<Goods> getGoods(){

@@ -1,6 +1,33 @@
 <!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="OrderMapper">
 
+    <resultMap id="orderBefore" type="entity.OrderBefore">
+        <result column="amount" property="amount"/>
+        <association column="orders" property="orders" javaType="entity.OrderBefore" select="getOrderById"/>
+        <association column="goods" property="goods" javaType="entity.Goods" select="selectGoodsById"/>
+    </resultMap>
+
+    <resultMap id="orders" type="entity.Order">
+        <id column="id" property="id"/>
+        <result column="create_time" property="create_time"/>
+        <result column="paid" property="paid"/>
+        <association property="buyer" column="buyer" javaType="entity.User" select="getUserById"/>
+    </resultMap>
+
+    <resultMap id="goods" type="entity.Goods">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="price" property="price"/>
+        <result column="foto_dir" property="foto_dir"/>
+        <result column="producer" property="producer"/>
+        <result column="color" property="color"/>
+        <result column="volume" property="volume"/>
+        <result column="create_time" property="create_time"/>
+        <association column="category" property="category" javaType="entity.Category" select="getCategoryById"/>
+        <association column="section" property="section" javaType="entity.Section" select="getSectionById"/>
+    </resultMap>
+
     <insert id="insert_order" parameterType="entity.Order">
       insert into k_order (buyer, paid) values(
       #{buyer.id, jdbcType=INTEGER, mode=IN},
@@ -21,6 +48,32 @@
         select * from k_order where id = #{id}
     </select>
 
+    <select id="getOrderBefore" resultMap="orderBefore" parameterType="long">
+        select * from order_good where orders = #{order_id}
+    </select>
 
+    <select id="selectGoodsById" resultMap="goods" parameterType="long" statementType="CALLABLE">
+        select * from k_goods where id = #{id}
+    </select>
+
+    <select id="getOrdersByUser" resultMap="orders" parameterType="long">
+        select * from k_order where buyer = #{user_id}
+    </select>
+
+    <select id="getOrders" resultMap="orders">
+        select * from k_order order by create_time desc
+    </select>
+
+    <select id="getUserById" resultType="entity.User" parameterType="long">
+        select * from k_user where id = #{id}
+    </select>
+
+    <select id="getCategoryById" resultType="entity.Category" parameterType="long">
+        select * from k_category where id = #{id}
+    </select>
+
+    <select id="getSectionById" resultType="entity.Section" parameterType="long">
+        select * from k_section where id = #{id}
+    </select>
 
 </mapper>

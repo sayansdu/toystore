@@ -11,7 +11,7 @@
             List<Section> sections2 = (List<Section>) session.getAttribute("sections");
             for (int i = 0; i < sections2.size(); i++) {
         %>
-        <li><a href="products.jsp"><% out.println(sections2.get(i).getValue()); %></a></li>
+        <li><a href="products.jsp"><%= (sections2.get(i).getValue()) %></a></li>
         <% } %>
     </ul>
 </div>
@@ -21,7 +21,7 @@
         <%  List<Category> categories2 = (List<Category>) session.getAttribute("categories");
             for (int i = 0; i < categories2.size(); i++) {
         %>
-        <li><a href="products.jsp"><% out.println(categories2.get(i).getValue()); %></a></li>
+        <li><a href="products.jsp"><%= (categories2.get(i).getValue()) %></a></li>
         <% } %>
     </ul>
     <br/>

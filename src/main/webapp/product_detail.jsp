@@ -14,7 +14,13 @@
 						<div class="row">
 							<div class="span4">
                                 <% Goods current_good = (Goods) session.getAttribute("current_good"); %>
-								<a href="#" class="thumbnail" data-fancybox-group="group1" title="Описание 1"><img alt="" src="images/toys/toy.jpg"></a>
+								<a href="#" class="thumbnail" data-fancybox-group="group1" title="Описание 1">
+                                    <% if(current_good.getImage()!=null) {%>
+                                        <img alt="" src="getImage.jsp?img_id=<%= current_good.getId() %>">
+                                    <% } else {%>
+                                        <img alt="" src="<%= current_good.getFoto_dir() %>">
+                                    <% } %>
+                                </a>
 								<ul class="thumbnails small">								
 									<li class="span1">
 										<a href="images/toys/toy.jpg" class="thumbnail" data-fancybox-group="group1" title="Описание 2"><img src="images/toys/toy.jpg" alt=""></a>

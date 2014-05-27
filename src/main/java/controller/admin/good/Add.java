@@ -24,10 +24,12 @@ public class Add extends HttpServlet {
             String name = "", description = "", category ="", photo_dir=File.separator+"Kupon"+File.separator+"images"+File.separator+"toys"+File.separator+"toy.jpg",
                     section="", producer="", color="", size="";
             int price = 0;
+            byte[] image = new byte[10];
 
             for(FileItem item : multiparts){
                 if(!item.isFormField() && item.getSize()!=0){
-                    String pname = new File(item.getName()).getName();
+                     image = item.get();
+/*                    String pname = new File(item.getName()).getName();
                     File dir = new File("C:"+File.separator+"image");
                     if(!dir.exists())    dir.mkdir();
 
@@ -39,13 +41,21 @@ public class Add extends HttpServlet {
                             break;
                         }
                     }
+
                     file_name = String.valueOf(name_in_milliseconds)+"."+file_type;
                     File file = new File(dir.getAbsolutePath() + File.separator + file_name);
                     file.setExecutable(false);
                     file.setWritable(false);
                     file.setExecutable(false);
                     photo_dir = file.getAbsolutePath();
-                    item.write(file);
+
+                    K_Image image = new K_Image();
+                    image.setImage(item.get());
+                    image.setPath(file_name);
+                    ImageRepository imageRepository = new ImageRepository();
+                    imageRepository.setImage(image);
+                    return;*/
+
                 }else {
                         if(item.getFieldName().equals("name")){
                             if((item.getString()).trim().isEmpty()){
@@ -93,7 +103,7 @@ public class Add extends HttpServlet {
                 return;
             }
             GoodService service = new GoodService();
-            service.saveGood(name, description, price, Long.parseLong(category),Long.parseLong(section), photo_dir, producer, color, size);
+            service.saveGood(name, description, price, Long.parseLong(category),Long.parseLong(section), photo_dir, producer, color, size, image);
 
         } catch (Exception ex) {
             ex.printStackTrace();

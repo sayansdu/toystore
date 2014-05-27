@@ -5,6 +5,9 @@ import entity.Order;
 import entity.OrderBefore;
 import org.apache.ibatis.session.SqlSession;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class OrderRepository {
 
     public void saveOrder(Order order){
@@ -60,5 +63,45 @@ public class OrderRepository {
         } finally{
             session.close();
         }
+    }
+
+    public List<Order> getOrdersByUser(long user_id){
+        SqlSession session = SessionFactory.getSessionFactory().openSession();
+        List<Order> orderBefores = new ArrayList<Order>();
+        try
+        {
+            orderBefores = session.selectList("OrderMapper.getOrdersByUser", user_id);
+        } catch(Exception e){
+            e.printStackTrace();
+        } finally{
+            session.close();
+        }
+        return orderBefores;
+    }
+
+    public List<Order> getOrders(){
+        SqlSession session = SessionFactory.getSessionFactory().openSession();
+        List<Order> orders = new ArrayList<Order>();
+        try
+        {
+            orders = session.selectList("OrderMapper.getOrders");
+        } catch(Exception e){
+            e.printStackTrace();
+        } finally{
+            session.close();
+        }
+        return orders;
+    }
+
+    public List<OrderBefore> getOrderDetails(long order_id){
+        SqlSession session = SessionFactory.getSessionFactory().openSession();
+        List<OrderBefore> orderBefores = new ArrayList<OrderBefore>();
+        try
+        {
+            orderBefores =  session.selectList("OrderMapper.getOrderBefore", order_id);
+        } finally{
+            session.close();
+        }
+        return orderBefores;
     }
 }

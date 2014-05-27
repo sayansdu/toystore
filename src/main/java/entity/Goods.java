@@ -15,6 +15,7 @@ public class Goods {
     private String color;
     private String volume;
     private Date create_time;
+    private byte[] image;
 
     public long getId() {
         return id;
@@ -104,4 +105,11 @@ public class Goods {
         this.volume = volume;
     }
 
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
 }

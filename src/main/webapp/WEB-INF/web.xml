@@ -22,8 +22,12 @@
       <servlet-name>AllGoods</servlet-name>
       <servlet-class>controller.admin.good.select.All</servlet-class>
   </servlet>
+  <servlet-mapping>
+      <servlet-name>AllGoods</servlet-name>
+      <url-pattern>/admin/goods/all</url-pattern>
+  </servlet-mapping>
 
-  <servlet>
+    <servlet>
       <servlet-name>add_good</servlet-name>
       <servlet-class>controller.admin.good.Add</servlet-class>
   </servlet>
@@ -47,7 +51,7 @@
   
   <servlet>
       <servlet-name>All_Goods_For_User</servlet-name>
-      <servlet-class>controller.user.All_Goods</servlet-class>
+      <servlet-class>controller.user.Cabinet</servlet-class>
   </servlet>
     <servlet>
         <servlet-name>Good_User</servlet-name>
@@ -70,10 +74,7 @@
       <url-pattern>/Logout</url-pattern>
   </servlet-mapping>  
     
-  <servlet-mapping>
-      <servlet-name>AllGoods</servlet-name>
-      <url-pattern>/admin/goods/all</url-pattern>
-  </servlet-mapping>  
+
 
     <servlet-mapping>
       <servlet-name>Remove_good</servlet-name>
@@ -150,4 +151,41 @@
         <servlet-name>DeleteFromBucket</servlet-name>
         <url-pattern>/order/before/delete</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ImageServlet</servlet-name>
+        <servlet-class>controller.Gallery</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ImageServlet</servlet-name>
+        <url-pattern>/gallery</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>OrderDetails</servlet-name>
+        <servlet-class>controller.user.OrderDetails</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderDetails</servlet-name>
+        <url-pattern>/order/details</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AdminCabinet</servlet-name>
+        <servlet-class>controller.admin.AdminCabinet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminCabinet</servlet-name>
+        <url-pattern>/admin/cabinet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OrderDetails2</servlet-name>
+        <servlet-class>controller.admin.OrderDetails2</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderDetails2</servlet-name>
+        <url-pattern>/admin/order/details</url-pattern>
+    </servlet-mapping>
+
 </web-app>

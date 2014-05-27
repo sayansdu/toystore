@@ -1,7 +1,8 @@
 package controller.user;
 
-import dal.UserRepository;
-import entity.Goods;
+import entity.Order;
+import entity.User;
+import service.OrderService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,21 +20,27 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 
-
-public class All_Goods extends HttpServlet {
+public class Cabinet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if(session.getAttribute("goods")!=null)
-            session.removeAttribute("goods");
         if(session.getAttribute("login")!=null)
             session.removeAttribute("login");
 
-        UserRepository dal = new UserRepository();
-        List<Goods> goods = dal.getGoods();
-        session.setAttribute("goods", goods);
+        User user = (User) session.getAttribute("current_user");
+        if(user!=null){
+            OrderService orderService = new OrderService();
+            List<Order> orders = orderService.getOrdersByUser(user.getId());
 
-//        response.sendRedirect("/Kupon/buyer/main.jsp");
-        response.sendRedirect("/Kupon/cabinet.jsp");
+            if(session.getAttribute("user_orders")!=null)
+                session.removeAttribute("user_orders");
+            session.setAttribute("user_orders", orders);
+            response.sendRedirect("/Kupon/cabinet.jsp");
+            return;
+        }
+        else{
+            response.sendRedirect("/Kupon/login-register.jsp");
+        }
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

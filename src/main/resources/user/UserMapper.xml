@@ -22,35 +22,6 @@
         ) from dual
     </insert>-->
 
-    <select id="selectGoods" resultType="entity.Goods">
-        select * from k_goods
-    </select>
-    <select id="selectGoodsById" resultType="entity.Goods" parameterType="long">
-        select * from k_goods where id = #{id}
-    </select>
-    <insert id="insertGood" parameterType="entity.Goods">
-      insert into k_goods (name, description, category, price, amount, foto_dir) values(
-      #{name, jdbcType=VARCHAR, mode=IN},
-      #{description, jdbcType=VARCHAR, mode=IN},
-      #{category, jdbcType=VARCHAR, mode=IN},
-      #{price, jdbcType=INTEGER, mode=IN},
-      #{amount, jdbcType=INTEGER, mode=IN},
-      #{photoDirectory, jdbcType=VARCHAR, mode=IN}
-      )
-    </insert>
-    <delete id="deleteGood" parameterType="long">
-        delete from k_goods where id = #{id}
-    </delete>
-    <update id="updateGood" parameterType="entity.Goods">
-        update k_goods set
-          name = #{name},
-          description = #{description},
-          category = #{category},
-          price = #{price},
-          amount = #{amount}
-          where id = #{id}
-    </update>
-
     <select id="getBuyerAmount" resultType="integer">
         select TOTALUSERS from dual
     </select>

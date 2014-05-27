@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -31,9 +32,9 @@
 					<a href="index.jsp" class="logo pull-left"><img src="images/logo.png" class="site_logo" alt=""></a>
 					<nav id="menu" class="pull-right">
 						<ul>
-							<li class="active"><a href="kurier.html">Заказы</a></li>				
+							<li class="active"><a href="courier.jsp">Заказы</a></li>
 							
-							<li><a href="logout.html">Выход</a></li>
+							<li><a href="/Kupon/Logout">Выход</a></li>
 						</ul>
 					</nav>
 				</div>

@@ -30,13 +30,16 @@ public class Save extends HttpServlet {
         try {
             List<FileItem> multiparts = new ServletFileUpload(
                     new DiskFileItemFactory()).parseRequest(request);
-            String id="", name = "", description = "", category ="", photo_dir= "",
-                    section="", producer="", color="", size="", foto_dir="";
+            String id="", name = "", description = "", category ="", photo_dir= File.separator+"Kupon"+File.separator+"images"+File.separator+"toys"+File.separator+"toy.jpg",
+                    section="", producer="", color="", size="";
+            byte[] foto_bytes = new byte[0];
             int price = 0;
 
             for(FileItem item : multiparts){
                 if(!item.isFormField() && item.getSize()!=0){
-                    System.out.println(item.getFieldName());
+                    foto_bytes = null;
+                    foto_bytes = item.get();
+                   /* System.out.println(item.getFieldName());
                     String pname = new File(item.getName()).getName();
                     File dir = new File("C:"+File.separator+"image");
                     if(!dir.exists())    dir.mkdir();
@@ -55,9 +58,8 @@ public class Save extends HttpServlet {
                     file.setWritable(false);
                     file.setExecutable(false);
                     photo_dir = file.getAbsolutePath();
-                    item.write(file);
+                    item.write(file);*/
                 }else {
-                    System.out.println(item.getFieldName());
                     if(item.getFieldName().equals("name")){
                         if((item.getString()).trim().isEmpty()){
                             request.setAttribute("error-name", "Название товара не должно быть пустым");
@@ -78,7 +80,6 @@ public class Save extends HttpServlet {
                     }
                     else if(item.getFieldName().equals("category")){
                         category = new String(item.getString().getBytes("iso-8859-1"), "UTF-8");
-                        System.out.println(item.getString());
                     }
 
 
@@ -87,28 +88,22 @@ public class Save extends HttpServlet {
                     }
                     else if(item.getFieldName().equals("section")){
                         section = new String(item.getString().getBytes("iso-8859-1"), "UTF-8");
-                        System.out.println(item.getString());
                     }
                     else if(item.getFieldName().equals("producer")){
                         producer = new String(item.getString().getBytes("iso-8859-1"), "UTF-8");
-                        System.out.println(item.getString());
                     }
                     else if(item.getFieldName().equals("color")){
                         color = new String(item.getString().getBytes("iso-8859-1"), "UTF-8");
-                        System.out.println(item.getString());
                     }
                     else if(item.getFieldName().equals("size")){
                         size = new String(item.getString().getBytes("iso-8859-1"), "UTF-8");
-                        System.out.println(item.getString());
                     }
                     else if(item.getFieldName().equals("id")){
                         id = item.getString();
-                        System.out.println(item.getString());
                     }
-                    else if(item.getFieldName().equals("foto_dir")){
-                        foto_dir="";
-                        foto_dir = new String(item.getString().getBytes("iso-8859-1"), "UTF-8");
-                        System.out.println(foto_dir);
+                    else if(item.getFieldName().equals("foto_bytes")){
+                        foto_bytes = null;
+                        foto_bytes = item.get();
                     }
 
                 }
@@ -118,14 +113,7 @@ public class Save extends HttpServlet {
                 return;
             }
             GoodService service = new GoodService();
-            if(photo_dir.length()>0){
-                service.updateGood(Long.parseLong(id), name, description, price, Long.parseLong(category),Long.parseLong(section), photo_dir, producer, color, size);
-                System.out.println(photo_dir);
-            }
-            else{
-                service.updateGood(Long.parseLong(id), name, description, price, Long.parseLong(category),Long.parseLong(section), foto_dir, producer, color, size);
-                System.out.println(foto_dir);
-            }
+            service.updateGood(Long.parseLong(id), name, description, price, Long.parseLong(category),Long.parseLong(section), photo_dir, producer, color, size,foto_bytes);
 
         } catch (Exception ex) {
             ex.printStackTrace();

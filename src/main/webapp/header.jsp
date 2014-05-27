@@ -1,5 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="entity.Section" %>
+<%@ page import="entity.User" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@include file="head.jsp"%>
 
@@ -24,11 +25,17 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;</a></li>
-                    <% if(session.getAttribute("current_user")!=null) { %>
-                    <li><a href="cabinet.jsp">Личный кабинет</a></li>
+                    <% if(session.getAttribute("current_user")!=null) {
+                        User cur_user = (User) session.getAttribute("current_user");
+                        if(cur_user.getStatus().equals("buyer")){
+                    %>
+                    <li><a href="/Kupon/buyer">Личный кабинет</a></li>
                     <li><a href="cart.jsp">Корзина</a></li>
                     <li><a href="/Kupon/Logout">Выход</a></li>
-                    <% } else {%>
+                    <% } else{ %>
+                    <li><a href="/Kupon/Logout">Выход</a></li>
+                    <% } %>
+                    <%} else {%>
                     <li><a href="/Kupon/order/before/get">Корзина</a></li>
                     <li><a href="login-register.jsp">Вход/Регистрация</a></li>
                     <% } %>
@@ -48,7 +55,7 @@
                     <%  List<Section> sections = (List<Section>) session.getAttribute("sections");
                         for (int i = 0; i < sections.size(); i++) {
                     %>
-                    <li><a href="products.jsp"><% out.println(sections.get(i).getValue()); %></a></li>
+                    <li><a href="products.jsp"><%= (sections.get(i).getValue()) %></a></li>
                     <% } %>
                 </ul>
             </nav>
