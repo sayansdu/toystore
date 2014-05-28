@@ -57,7 +57,7 @@
                         </table>
                         <div class="row" id="cart_do_order">
                                 <% if(session.getAttribute("current_user")!=null) { %>
-                                <form class="form-inline" action="/Kupon/order/save" method="get">
+                                <form class="form-inline" action="payment.jsp" method="get">
                                     <button class="btn btn-inverse" type="submit">Оформить заказ</button>
                                 </form>
                                 <% } else { %>

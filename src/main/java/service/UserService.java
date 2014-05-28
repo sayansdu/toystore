@@ -8,6 +8,7 @@ import dal.UserRepository;
 import entity.User;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -50,4 +51,15 @@ public class UserService {
         return user;
     }
 
+    public void updateUserData(User user){
+        dal.updateUserData(user);
+    }
+
+    public List<User> getCouriers(){
+        return dal.getCouriers();
+    }
+
+    public User getUserById(long id){
+        return dal.getUserById(id);
+    }
 }

@@ -19,12 +19,17 @@
                         %>"</h5>
 						<table class="table">
                                       <thead>
-                                        <tr>
-                                          <th>Продукты</th>
+                                      <tr>
                                           <th>Покупатель</th>
+                                          <th>Игрушки</th>
                                           <th>Время заказа</th>
-                                          <th>Оплачено/Доставлено</th>
-                                        </tr>
+                                          <%-- <th>Общая сумма</th>--%>
+                                          <th>Способ оплаты</th>
+                                          <th>Оплачено</th>
+                                          <th>Способ доставки</th>
+                                          <th>Доставлено</th>
+                                          <th>Курьер</th>
+                                      </tr>
                                       </thead>
                                    
                                         <tbody>
@@ -32,18 +37,47 @@
                                                 List<Order> orders = (List<Order>) session.getAttribute("user_orders");
                                                 for (int i = 0; i < orders.size(); i++) { %>
                                                     <tr>
-                                                        <td><a href="/Kupon/order/details?order_id=<%= orders.get(i).getId() %>">Подробнее</a></td>
                                                         <td><%= orders.get(i).getBuyer().getName() %></td>
-                                                        <td><% SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+                                                        <td><a href="/Kupon/order/details?order_id=<%= orders.get(i).getId() %>">Подробнее</a></td>
+                                                        <td><% SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                                                                String date =  format.format(orders.get(i).getCreate_time());
                                                             %>
                                                             <%= date %>
                                                         </td>
-                                                        <% if(orders.get(i).getPaid()==1){ %>
-                                                        <td><input type="checkbox" checked></td>
+
+                                                        <% if(orders.get(i).getPayment_type().equals("cash")){ %>
+                                                        <td>Наличными</td>
+                                                        <% } else { %>
+                                                        <td>Онлайн</td>
+
+                                                        <% }if(orders.get(i).getPaid()==1){ %>
+                                                        <td><input type="checkbox" checked disabled></td>
                                                          <% } else { %>
-                                                        <td><input type="checkbox" ></td>
-                                                         <% } %>
+                                                        <td><input type="checkbox" disabled></td>
+
+                                                        <% } if(orders.get(i).getDelivery().equals("courier")) {%>
+                                                        <td>Курьером</td>
+                                                        <% } else { %>
+                                                        <td>Самовывоз</td>
+                                                        <% } if(orders.get(i).getDelivery().equals("courier")) {
+                                                            if(orders.get(i).getDelivered()==0){
+                                                        %>
+                                                        <td><input type="checkbox" disabled></td>
+                                                        <%} else {%>
+                                                        <td><input type="checkbox" checked disabled></td>
+                                                        <%       }
+                                                        } else { %>
+                                                        <td><input type="checkbox" disabled></td>
+                                                        <% } if(orders.get(i).getDelivery().equals("courier")){
+                                                            if(orders.get(i).getCourier()!=null){
+                                                        %>
+                                                        <td><%= orders.get(i).getCourier().getName() %></td>
+                                                        <%} else {%>
+                                                        <td>Не назначено</td>
+                                                        <%    }
+                                                          } else { %>
+                                                        <td>Не нуждается</td>
+                                                        <% } %>
                                                     </tr>
                                             <%
                                                 }

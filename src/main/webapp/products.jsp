@@ -1,65 +1,43 @@
+<%@ page import="entity.*" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@include file="header.jsp"%>
 
-			<section class="header_text sub">
-				<span style="float:left;"><u><a href="main.jsp">Главная</a></u> > Название категории</span>
-			</section>
 			<section class="main-content">
 				
 				<div class="row">						
 					<div class="span9">								
 						<ul class="thumbnails listing-products">
-							<li class="span2">
-								<div class="product-box">
-									<a href="product_detail.jsp"><img alt="" src="images/toys/toy.jpg"></a><br/>
-									<a href="product_detail.jsp" class="title">Имя</a><br/>
-									Количество <input type="number" name="book_qty" value="1"  class="input-small">
-									<p class="price">Цена</p>
+                        <%  List<Goods> sec_goods = (List<Goods>) session.getAttribute("section_goods");
+                            if(sec_goods==null)
+                                sec_goods = (List<Goods>) session.getAttribute("category_goods");
 
-									<button type="button" class="btn btn-default">В корзину</button>
-								</div>
-							</li>       
-							<li class="span2">
-								<div class="product-box">
-									<a href="product_detail.jsp"><img alt="" src="images/toys/toy.jpg"></a><br/>
-									<a href="product_detail.jsp" class="title">Имя</a><br/>
-									Количество <input type="number" name="book_qty" value="1"  class="input-small">
-									<p class="price">Цена</p>
+                            for (int i = 0; i < sec_goods.size(); i++) {
+                                if(sec_goods.get(i).getImage()!=null) {
+                        %>
+                            <li class="span2">
+                                <div class="product-box" onclick="">
+                                    <a href="/Kupon/good/get?id=<%=(sec_goods.get(i).getId()) %>"><img alt="" src="getImage.jsp?img_id=<%= sec_goods.get(i).getId() %>" /></a><br/>
+                                    <a href="/Kupon/good/get?id=<%=(sec_goods.get(i).getId()) %>" class="title"><%=(sec_goods.get(i).getName()) %></a><br/>
+                                    Количество <input type="number" name="book_qty" value="1" class="input-small">
+                                    <p class="price">Цена: <%=(sec_goods.get(i).getPrice()) %> тг.</p>
 
-									<button type="button" class="btn btn-default">В корзину</button>
-								</div>
-							</li>
-							<li class="span2">
-								<div class="product-box">
-									<a href="product_detail.jsp"><img alt="" src="images/toys/toy.jpg"></a><br/>
-									<a href="product_detail.jsp" class="title">Имя</a><br/>
-									Количество <input type="number" name="book_qty" value="1"  class="input-small">
-									<p class="price">Цена</p>
+                                    <button type="button" class="btn btn-default" onclick="add_to_bucket(<%=(sec_goods.get(i).getId()) %>, <%=(i) %>)">В корзину</button>
+                                </div>
+                            </li>
+                            <% } else { %>
+                            <li class="span2">
+                                <div class="product-box" onclick="">
+                                    <a href="/Kupon/good/get?id=<%=(sec_goods.get(i).getId()) %>"><img alt="" src="<%= sec_goods.get(i).getFoto_dir() %>"></a><br/>
+                                    <a href="/Kupon/good/get?id=<%=(sec_goods.get(i).getId()) %>" class="title"><%= (sec_goods.get(i).getName()) %></a><br/>
+                                    Количество <input type="number" name="book_qty" value="1" class="input-small">
+                                    <p class="price">Цена: <%=(sec_goods.get(i).getPrice()) %> тг.</p>
 
-									<button type="button" class="btn btn-default">В корзину</button>
-								</div>
-							</li>
-							<li class="span2">
-								<div class="product-box">
-									<a href="product_detail.jsp"><img alt="" src="images/toys/toy.jpg"></a><br/>
-									<a href="product_detail.jsp" class="title">Имя</a><br/>
-									Количество <input type="number" name="book_qty" value="1"  class="input-small">
-									<p class="price">Цена</p>
-
-									<button type="button" class="btn btn-default">В корзину</button>
-								</div>
-							</li>
-							<li class="span2">
-								<div class="product-box">
-									<a href="product_detail.jsp"><img alt="" src="images/toys/toy.jpg"></a><br/>
-									<a href="product_detail.jsp" class="title">Имя</a><br/>
-									Количество <input type="number" name="book_qty" value="1"  class="input-small">
-									<p class="price">Цена</p>
-
-									<button type="button" class="btn btn-default">В корзину</button>
-								</div>
-							</li>
-							
+                                    <button type="button" class="btn btn-default" onclick="add_to_bucket(<%=(sec_goods.get(i).getId()) %>, <%= (i) %>)">В корзину</button>
+                                </div>
+                            </li>
+                            <%      }
+                                }
+                            %>
 						</ul>								
 						<hr>
 						<%--<div class="pagination pagination-small pagination-centered">

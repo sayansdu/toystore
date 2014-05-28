@@ -30,4 +30,19 @@
         select SIGNIN(#{email}, #{password}) from dual
     </select>
 
+    <update id="updateUserData" parameterType="entity.User">
+        update k_user set
+        TELEPHONE = #{telephone},
+        ADDRESS = #{address}
+        where id = #{id}
+    </update>
+
+    <select id="getCouriers" resultType="entity.User">
+        select * from k_user where status = 'courier'
+    </select>
+
+    <select id="getUserById" resultType="entity.User" parameterType="long">
+        select * from k_user where id = #{id}
+    </select>
+
 </mapper>

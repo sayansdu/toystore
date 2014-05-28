@@ -1,3 +1,7 @@
+<%@ page import="java.util.List" %>
+<%@ page import="entity.Order" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="util.VerSign" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,6 +27,18 @@
 		<script src="js/superfish.js"></script>	
 		<script src="js/jquery.scrolltotop.js"></script>
 
+        <script type="text/javascript">
+
+            function printVer(cel){
+                if(cel){
+                    alert("Данные пользователя проверяны цифровой подпистью. Данные целы");
+                }
+                else {
+                    alert("Данные пользователя были изменены. Будьте осторожны");
+                }
+
+            }
+        </script>
 	</head>
     <body>		
 		
@@ -50,37 +66,82 @@
 						<table class="table">
                                       <thead>
                                         <tr>
-                                          <th>Номер заказа</th>
-                                          <th>ID Пользователя</th>
-                                          <th>ID книги</th>
-                                          <th>Наименование игрушки</th>
-                                          <th>Цена</th>
-                                          <th>Кол.</th>
-                                          <th>Общая сумма</th>
-                                          <th>Статус</th>
+                                            <th>Покупатель</th>
+                                            <th>Телефон</th>
+                                            <th>Адрес</th>
+                                            <th>Игрушки</th>
+                                            <th>Время заказа</th>
+                                            <th>Проверка на целосность</th>
+                                            <th>Способ оплаты</th>
+                                            <th>Оплачено</th>
+                                            <th>Доставлено</th>
+                                            <th></th>
                                         </tr>
                                       </thead>
                                    
                                         <tbody>
+                                        <% List<Order> orders = (List<Order>) session.getAttribute("courier_orders");
+                                           if(orders!=null){
+                                               for (int i = 0; i < orders.size(); i++) {
+                                                   boolean ver_result = false;
+                                        %>
+                                        <form action="/Kupon/courier/set_delivered" method="post">
                                             <tr>
-                                              <td>3</td>
-                                              <td>4</td>
-                                              <td>44</td>
-                                              <td>имя </td>
-                                              <td>555</td>
-                                              <td>2</td>
-                                              <td>1110</td>
-                                              <td><input type="button" name="submit" value="Доставлено"></td>
+                                                <td><%= orders.get(i).getBuyer().getName() %></td>
+                                                <td><%= orders.get(i).getBuyer().getTelephone() %></td>
+                                                <td><%= orders.get(i).getBuyer().getAddress() %></td>
+                                                <td><a href="/Kupon/admin/order/details?order_id=<%= orders.get(i).getId() %>">Подробнее</a></td>
+                                                <td>
+                                                    <% SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                                                        String date =  format.format(orders.get(i).getCreate_time());
+                                                    %>
+                                                    <%= date %>
+                                                </td>
+                                                <%
+                                                    VerSign ver = new VerSign();
+                                                    ver_result = ver.checkMessage(orders.get(i).getId());
+                                                %>
+                                                <% if(orders.get(i).getDelivered()==1){ %>
+                                                <td><input type="button" value="проверка" onclick="printVer(<%= ver_result %>)" disabled></td>
+                                                <% }else {%>
+                                                <td><input type="button" value="проверка" onclick="printVer(<%= ver_result %>)"></td>
+                                                <%}%>
+
+                                                <% if(orders.get(i).getPayment_type().equals("cash")){ %>
+                                                <td>Наличными</td>
+                                                <% } else { %>
+                                                <td>Онлайн</td>
+                                                <% } if(orders.get(i).getPaid()==1){ %>
+                                                <td><input type="checkbox" name="paid" checked disabled></td>
+                                                <% } else { %>
+                                                <td><input type="checkbox" name="paid"></td>
+                                                <% } if(orders.get(i).getDelivered()==1){ %>
+                                                <td><input type="checkbox" checked disabled></td>
+                                                <% } else { %>
+                                                <td><input type="checkbox"></td>
+                                                <% } %>
+
+                                               <input type="hidden" name="delivered" value="1">
+                                               <input type="hidden" name="order_id" value="<%= orders.get(i).getId() %>">
+                                              <td>
+                                                  <% if(orders.get(i).getDelivered()==1){ %>
+                                                  <input type="submit" name="submit" value="Доставлено" disabled>
+                                                  <% }else {%>
+                                                  <input type="submit" name="submit" value="Доставлено">
+                                                  <%}%>
+                                              </td>
                                             </tr>
+                                        </form>
+                                        <%     }
+                                            }
+                                        %>
                                         </tbody>
-                                          
-                                  
-                                      
+
                                     </table>		
 
 					</div>
 					</div>
-					
+
 			</section>
 			
 			<section id="footer-bar">

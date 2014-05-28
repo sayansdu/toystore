@@ -19,6 +19,14 @@ public class GoodService {
         return dal.getGoods();
     }
 
+    public List<Goods> getGoodsBySection(long section_id){
+        return dal.getGoodsBySection(section_id);
+    }
+
+    public List<Goods> getGoodsByCategory(long category_id){
+        return dal.getGoodsByCategory(category_id);
+    }
+
     public void saveGood(String name, String description, int price, long category, long section, String photoDir, String producer, String color, String size, byte[] image) throws Exception {
         Goods good = new Goods();
         good.setName(name);

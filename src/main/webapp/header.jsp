@@ -48,14 +48,14 @@
 <div id="wrapper" class="container">
     <section class="navbar main-menu">
         <div class="navbar-inner main-menu">
-            <a href="main.jsp" class="logo pull-left"><img src="images/logo.png" class="site_logo" alt=""></a>
+            <a href="/Kupon/main" class="logo pull-left"><img src="images/logo.png" class="site_logo" alt=""></a>
             <nav id="menu" class="pull-right">
                 <ul>
-                    <li class="active"><a href="main.jsp">Главная</a></li>
+                    <li class="active"><a href="/Kupon/main">Главная</a></li>
                     <%  List<Section> sections = (List<Section>) session.getAttribute("sections");
                         for (int i = 0; i < sections.size(); i++) {
                     %>
-                    <li><a href="products.jsp"><%= (sections.get(i).getValue()) %></a></li>
+                    <li><a href="/Kupon/goods/get/by?section_id=<%= sections.get(i).getId() %>"><%= (sections.get(i).getValue()) %></a></li>
                     <% } %>
                 </ul>
             </nav>

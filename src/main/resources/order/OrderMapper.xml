@@ -11,6 +11,17 @@
         <id column="id" property="id"/>
         <result column="create_time" property="create_time"/>
         <result column="paid" property="paid"/>
+        <result column="delivered" property="delivered"/>
+        <result column="payment_type" property="payment_type"/>
+        <result column="delivery" property="delivery"/>
+        <association property="buyer" column="buyer" javaType="entity.User" select="getUserById"/>
+        <association property="courier" column="courier" javaType="entity.User" select="getUserById"/>
+    </resultMap>
+
+    <resultMap id="orderForSign" type="entity.Order">
+        <id column="id" property="id"/>
+        <result column="public_key" property="public_key"/>
+        <result column="sign_text" property="sign_text"/>
         <association property="buyer" column="buyer" javaType="entity.User" select="getUserById"/>
     </resultMap>
 
@@ -29,9 +40,13 @@
     </resultMap>
 
     <insert id="insert_order" parameterType="entity.Order">
-      insert into k_order (buyer, paid) values(
+      insert into k_order (buyer, paid, payment_type, delivery, public_key, sign_text) values(
       #{buyer.id, jdbcType=INTEGER, mode=IN},
-      #{paid, jdbcType=INTEGER, mode=IN} )
+      #{paid, jdbcType=INTEGER, mode=IN} ,
+      #{payment_type, jdbcType=VARCHAR, mode=IN},
+      #{delivery, jdbcType=VARCHAR, mode=IN},
+      #{public_key, jdbcType=BLOB, mode=IN},
+      #{sign_text, jdbcType=BLOB, mode=IN})
     </insert>
 
     <insert id="insert_order_good" parameterType="entity.OrderBefore">
@@ -44,7 +59,7 @@
     <select id="lastOrderId" resultType="entity.Order">
         SELECT * FROM k_order WHERE ROWNUM &lt;= 1 ORDER BY id DESC
     </select>
-    <select id="getOrderById" parameterType="integer" resultType="entity.Order">
+    <select id="getOrderById" parameterType="long" resultType="entity.Order">
         select * from k_order where id = #{id}
     </select>
 
@@ -57,11 +72,19 @@
     </select>
 
     <select id="getOrdersByUser" resultMap="orders" parameterType="long">
-        select * from k_order where buyer = #{user_id}
+        select * from k_order where buyer = #{user_id} order by create_time desc
+    </select>
+
+    <select id="getOrdersByCourier" resultMap="orders" parameterType="long">
+        select * from k_order where courier = #{courier_id} order by create_time desc
     </select>
 
     <select id="getOrders" resultMap="orders">
         select * from k_order order by create_time desc
+    </select>
+
+    <select id="getOrderForSign" resultMap="orderForSign" parameterType="long">
+        select id, buyer, public_key, sign_text from k_order where id = #{order_id}
     </select>
 
     <select id="getUserById" resultType="entity.User" parameterType="long">
@@ -75,5 +98,20 @@
     <select id="getSectionById" resultType="entity.Section" parameterType="long">
         select * from k_section where id = #{id}
     </select>
+
+    <update id="setCourierToOrder" parameterType="entity.Order">
+        update k_order set
+        courier = #{courier.id}
+        where id = #{id}
+    </update>
+
+    <update id="setOrderDelivered" parameterType="entity.Order">
+        update k_order set
+        delivered = #{delivered}
+        <if test="paid != null">
+        , paid = #{paid}
+        </if>
+        where id = #{id}
+    </update>
 
 </mapper>

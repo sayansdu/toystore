@@ -39,14 +39,13 @@
                                 for (int i = 0; i < goods.size(); i++) {
                                     if(goods.get(i).getImage()!=null) {
 
-
                             %>
                             <li class="span2">
                                 <div class="product-box" onclick="">
                                     <a href="/Kupon/good/get?id=<%=(goods.get(i).getId()) %>"><img alt="" src="getImage.jsp?img_id=<%= goods.get(i).getId() %>" /></a><br/>
                                     <a href="/Kupon/good/get?id=<%=(goods.get(i).getId()) %>" class="title"><%=(goods.get(i).getName()) %></a><br/>
                                     Количество <input type="number" name="book_qty" value="1" class="input-small">
-                                    <p class="price">Цена: <%=(goods.get(i).getPrice()) %></p>
+                                    <p class="price">Цена: <%=(goods.get(i).getPrice()) %> тг.</p>
 
                                     <button type="button" class="btn btn-default" onclick="add_to_bucket(<%=(goods.get(i).getId()) %>, <%=(i) %>)">В корзину</button>
                                 </div>
@@ -57,7 +56,7 @@
                                     <a href="/Kupon/good/get?id=<%=(goods.get(i).getId()) %>"><img alt="" src="<%= goods.get(i).getFoto_dir() %>"></a><br/>
                                     <a href="/Kupon/good/get?id=<%=(goods.get(i).getId()) %>" class="title"><%= (goods.get(i).getName()) %></a><br/>
                                     Количество <input type="number" name="book_qty" value="1" class="input-small">
-                                    <p class="price">Цена: <%=(goods.get(i).getPrice()) %></p>
+                                    <p class="price">Цена: <%=(goods.get(i).getPrice()) %> тг.</p>
 
                                     <button type="button" class="btn btn-default" onclick="add_to_bucket(<%=(goods.get(i).getId()) %>, <%= (i) %>)">В корзину</button>
                                 </div>

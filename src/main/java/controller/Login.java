@@ -51,7 +51,7 @@ public class Login extends HttpServlet {
                 }
 
                 else if(user.getStatus().equals("courier"))
-                    response.sendRedirect("admin/courier.jsp");
+                    response.sendRedirect("/Kupon/courier/cabinet");
                 else
                     response.sendRedirect("/Kupon/buyer");
 

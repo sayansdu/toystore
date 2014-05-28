@@ -39,11 +39,24 @@ public class OrderRepository {
 
     public Order getOrderById(long id){
         SqlSession session = SessionFactory.getSessionFactory().openSession();
-        Order order = new Order();
+        Order order = null;
         try
         {
-            order = session.selectOne("OrderMapper.getOrderById");
-            session.commit();
+            order = session.selectOne("OrderMapper.getOrderById", id);
+        } catch(Exception e){
+            e.printStackTrace();
+        } finally{
+            session.close();
+        }
+        return order;
+    }
+
+    public Order getOrderForSign(long order_id){
+        SqlSession session = SessionFactory.getSessionFactory().openSession();
+        Order order = null;
+        try
+        {
+            order = session.selectOne("OrderMapper.getOrderForSign", order_id);
         } catch(Exception e){
             e.printStackTrace();
         } finally{
@@ -103,5 +116,45 @@ public class OrderRepository {
             session.close();
         }
         return orderBefores;
+    }
+
+    public void setCourierToOrder(Order order){
+        SqlSession session = SessionFactory.getSessionFactory().openSession();
+        try
+        {
+            session.update("OrderMapper.setCourierToOrder", order);
+            session.commit();
+        } catch(Exception e){
+            e.printStackTrace();
+        } finally{
+            session.close();
+        }
+    }
+
+    public void setOrderDelivered(Order order){
+        SqlSession session = SessionFactory.getSessionFactory().openSession();
+        try
+        {
+            session.update("OrderMapper.setOrderDelivered", order);
+            session.commit();
+        } catch(Exception e){
+            e.printStackTrace();
+        } finally{
+            session.close();
+        }
+    }
+
+    public List<Order> getOrdersByCourier(long courier_id){
+        SqlSession session = SessionFactory.getSessionFactory().openSession();
+        List<Order> order = new ArrayList<Order>();
+        try
+        {
+            order = session.selectList("OrderMapper.getOrdersByCourier", courier_id);
+        } catch(Exception e){
+            e.printStackTrace();
+        } finally{
+            session.close();
+        }
+        return order;
     }
 }

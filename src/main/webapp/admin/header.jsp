@@ -33,7 +33,7 @@
             <a href="index.jsp" class="logo pull-left"><img src="images/logo.png" class="site_logo" alt=""></a>
             <nav id="menu" class="pull-right">
                 <ul>
-                    <li><a href="index.jsp">Заказы</a></li>
+                    <li><a href="/Kupon/admin/cabinet">Заказы</a></li>
                     <li><a href="/Kupon/admin/goods/all">Игрушки</a></li>
                     <li><a href="/Kupon/admin/add_product.jsp">Добавить</a></li>
                     <li><a href="/Kupon/Logout">Выход</a></li>

@@ -34,6 +34,10 @@ public class OrderService {
         return orderRepository.getOrderById(id);
     }
 
+    public Order getOrderForSign(long id){
+        return orderRepository.getOrderForSign(id);
+    }
+
     public List<Order> getOrdersByUser(long user_id){
         return orderRepository.getOrdersByUser(user_id);
     }
@@ -44,5 +48,17 @@ public class OrderService {
 
     public List<OrderBefore> getOrderDetails(long user_id){
         return orderRepository.getOrderDetails(user_id);
+    }
+
+    public void setCourierToOrder(Order order){
+        orderRepository.setCourierToOrder(order);
+    }
+
+    public void setOrderDelivered(Order order){
+        orderRepository.setOrderDelivered(order);
+    }
+
+    public List<Order> getOrdersByCourier(long courier_id){
+        return orderRepository.getOrdersByCourier(courier_id);
     }
 }

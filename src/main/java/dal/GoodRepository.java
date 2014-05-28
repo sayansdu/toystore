@@ -24,6 +24,30 @@ public class GoodRepository {
         return goods;
     }
 
+    public List<Goods> getGoodsBySection(long section_id){
+        SqlSession session = SessionFactory.getSessionFactory().openSession();
+        List<Goods> goods;
+        try
+        {
+            goods =  session.selectList("GoodMapper.getGoodsBySection", section_id);
+        } finally{
+            session.close();
+        }
+        return goods;
+    }
+
+    public List<Goods> getGoodsByCategory(long category_id){
+        SqlSession session = SessionFactory.getSessionFactory().openSession();
+        List<Goods> goods;
+        try
+        {
+            goods =  session.selectList("GoodMapper.getGoodsByCategory", category_id);
+        } finally{
+            session.close();
+        }
+        return goods;
+    }
+
     public Goods getGoodsById(long id){
         SqlSession session = SessionFactory.getSessionFactory().openSession();
         Goods goods;

@@ -14,10 +14,14 @@
                                       <thead>
                                         <tr>
                                             <th>Покупатель</th>
-                                            <th>Продукты/Товары</th>
+                                            <th>Игрушки</th>
                                             <th>Время заказа</th>
                                            <%-- <th>Общая сумма</th>--%>
-                                            <th>Оплачено/Доставлено</th>
+                                            <th>Способ оплаты</th>
+                                            <th>Оплачено</th>
+                                            <th>Способ доставки</th>
+                                            <th>Доставлено</th>
+                                            <th>Курьер</th>
                                         </tr>
                                       </thead>
                                    
@@ -29,7 +33,7 @@
                                               <td><%= orders.get(i).getBuyer().getName() %></td>
                                               <td><a href="/Kupon/admin/order/details?order_id=<%= orders.get(i).getId() %>">Подробнее</a></td>
                                               <td>
-                                                  <% SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+                                                  <% SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                                                       String date =  format.format(orders.get(i).getCreate_time());
                                                   %>
                                                   <%= date %>
@@ -37,10 +41,36 @@
                                               <%--<td>
                                                 $$$
                                               </td>--%>
-                                              <% if(orders.get(i).getPaid()==1){ %>
-                                                <td><input type="checkbox" checked></td>
+                                              <% if(orders.get(i).getPayment_type().equals("cash")){ %>
+                                                    <td>Наличными</td>
                                               <% } else { %>
-                                                <td><input type="checkbox" ></td>
+                                                    <td>Онлайн</td>
+                                              <% } if(orders.get(i).getPaid()==1){ %>
+                                                    <td><input type="checkbox" checked></td>
+                                              <% } else { %>
+                                                    <td><input type="checkbox" ></td>
+                                              <% } if(orders.get(i).getDelivery().equals("courier")) {%>
+                                                    <td>Курьером</td>
+                                              <% } else { %>
+                                                    <td>Самовывоз</td>
+                                              <% } if(orders.get(i).getDelivery().equals("courier")) {
+                                                       if(orders.get(i).getDelivered()==0){
+                                              %>
+                                                    <td><input type="checkbox"></td>
+                                                      <%} else {%>
+                                                     <td><input type="checkbox" checked></td>
+                                              <%       }
+                                                 } else { %>
+                                                    <td><input type="checkbox" disabled></td>
+                                              <% } if(orders.get(i).getDelivery().equals("courier")){
+                                                       if(orders.get(i).getCourier()!=null){
+                                              %>
+                                                    <td><%= orders.get(i).getCourier().getName() %></td>
+                                                    <%} else {%>
+                                                    <td><a href="/Kupon/admin/order/set_courier?order_id=<%= orders.get(i).getId() %>">Назначить</a></td>
+                                              <%    }
+                                                  } else { %>
+                                                    <td>Не нуждается</td>
                                               <% } %>
                                             </tr>
                                         <% } %>

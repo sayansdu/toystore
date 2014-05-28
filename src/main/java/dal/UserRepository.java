@@ -127,6 +127,40 @@ public class UserRepository {
         return result;
     }
 
+    public void updateUserData(User user){
+        SqlSession session = SessionFactory.getSessionFactory().openSession();
+        try
+        {
+            session.update("UserMapper.updateUserData", user);
+            session.commit();
+        } catch(Exception e){
+            e.printStackTrace();
+        } finally{
+            session.close();
+        }
+    }
 
+    public List<User> getCouriers(){
+        SqlSession session = SessionFactory.getSessionFactory().openSession();
+        List<User> users;
+        try
+        {
+            users =  session.selectList("UserMapper.getCouriers");
+        } finally{
+            session.close();
+        }
+        return users;
+    }
 
+    public User getUserById(long id){
+        SqlSession session = SessionFactory.getSessionFactory().openSession();
+        User user;
+        try
+        {
+            user = (User) session.selectOne("UserMapper.getUserById", id);
+        } finally{
+            session.close();
+        }
+        return user;
+    }
 }

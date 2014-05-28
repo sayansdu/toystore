@@ -187,5 +187,49 @@
         <servlet-name>OrderDetails2</servlet-name>
         <url-pattern>/admin/order/details</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>SetCourier</servlet-name>
+        <servlet-class>controller.admin.SetCourier</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SetCourier</servlet-name>
+        <url-pattern>/admin/order/set_courier</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>SaveCourier</servlet-name>
+        <servlet-class>controller.admin.SaveCourier</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SaveCourier</servlet-name>
+        <url-pattern>/admin/order/save_courier</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>CourierCabinet</servlet-name>
+        <servlet-class>controller.courier.CourierCabinet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CourierCabinet</servlet-name>
+        <url-pattern>/courier/cabinet</url-pattern>
+    </servlet-mapping>
 
+    <servlet>
+        <servlet-name>CourierSetDelivered</servlet-name>
+        <servlet-class>controller.courier.SetDelivered</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CourierSetDelivered</servlet-name>
+        <url-pattern>/courier/set_delivered</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GoodSection</servlet-name>
+        <servlet-class>controller.user.GoodSection</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GoodSection</servlet-name>
+        <url-pattern>/goods/get/by</url-pattern>
+    </servlet-mapping>
 </web-app>

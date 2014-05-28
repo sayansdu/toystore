@@ -22,7 +22,7 @@
                                                         <% } %>">
                                     </a><br/>
                                     <a class="title"><%=(goods.get(i).getName()) %></a><br/>
-                                    <p class="price">Цена: <%=(goods.get(i).getPrice()) %></p>
+                                    <p class="price">Цена: <%=(goods.get(i).getPrice()) %> тг.</p>
 
                                     <form action="/Kupon/admin/good/update/get" method="post">
                                         <input type="hidden" name="update_id" value="<%=(goods.get(i).getId()) %>">

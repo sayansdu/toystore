@@ -72,4 +72,12 @@
         select * from k_image where ROWNUM &lt;= 1
     </select>
 
+    <select id="getGoodsBySection" resultMap="goods" parameterType="long">
+        select * from k_goods where section = #{section_id} order by create_time desc
+    </select>
+
+    <select id="getGoodsByCategory" resultMap="goods" parameterType="long">
+        select * from k_goods where category = #{category_id} order by create_time desc
+    </select>
+
 </mapper>
