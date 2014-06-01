@@ -19,7 +19,6 @@
                 <ul class="user-menu">
                     <li><a href="contact.jsp">Контакты</a></li>
                     <li><a href="delivery.jsp">Доставка</a></li>
-                    <li><a href="payment.jsp">Оплата</a></li>
                     <li><a href="faq.jsp">FAQ</a></li>
                     <li><a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

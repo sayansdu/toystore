@@ -1,5 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import="java.util.List" %>
+<%@ page import="entity.Category" %>
+<%@ page import="entity.Section" %>
+
 <ul class="nav nav-list">
     <li class="nav-header"><u>Категории</u></li>
 

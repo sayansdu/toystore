@@ -3,6 +3,7 @@ package controller.user;
 import entity.Order;
 import entity.User;
 import service.OrderService;
+import service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,8 +27,16 @@ public class Cabinet extends HttpServlet {
         if(session.getAttribute("login")!=null)
             session.removeAttribute("login");
 
+        try{
         User user = (User) session.getAttribute("current_user");
         if(user!=null){
+            if(user.getId()==0){
+                UserService userService = new UserService();
+                user = userService.getUserByEmail(user.getEmail());
+                if(session.getAttribute("current_user")!=null)
+                    session.removeAttribute("current_user");
+                session.setAttribute("current_user", user);
+            }
             OrderService orderService = new OrderService();
             List<Order> orders = orderService.getOrdersByUser(user.getId());
 
@@ -37,10 +46,10 @@ public class Cabinet extends HttpServlet {
             response.sendRedirect("/Kupon/cabinet.jsp");
             return;
         }
-        else{
-            response.sendRedirect("/Kupon/login-register.jsp");
+        }catch (Exception e){
+            e.printStackTrace();
         }
-
+        response.sendRedirect("/Kupon/login-register.jsp");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

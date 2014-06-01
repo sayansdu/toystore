@@ -5,6 +5,7 @@ import entity.Goods;
 import entity.User;
 import org.apache.ibatis.session.SqlSession;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserRepository {
@@ -19,6 +20,18 @@ public class UserRepository {
             session.close();
         }
         return user;
+    }
+
+    public List<User> getAllUserByEmail(String email){
+        SqlSession session = SessionFactory.getSessionFactory().openSession();
+        List<User> users = new ArrayList<User>();
+        try
+        {
+            users = session.selectList("UserMapper.selectUser", email);
+        } finally{
+            session.close();
+        }
+        return users;
     }
 
     public void setUser(User user){

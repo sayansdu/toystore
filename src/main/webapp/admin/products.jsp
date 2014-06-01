@@ -3,7 +3,7 @@
 <%@include file="header.jsp"%>
 
 			<section class="header_text sub">
-				<h4><u>Все игрушки</u></h4> или <h4><u><a href="products.jsp"> Все игрушки</a></u></a>  > раздел или категорию сюда</h4>
+				<h4><u>Все игрушки</u></h4>
 			</section>
 			<section class="main-content">
 			<div class="row">						

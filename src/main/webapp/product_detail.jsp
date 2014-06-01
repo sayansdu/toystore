@@ -2,7 +2,8 @@
 <%@ page import="entity.Goods" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@include file="header.jsp"%>
-
+            <section class="header_text sub">
+            </section>
 			<section class="main-content">
 				
 				<div class="row">						

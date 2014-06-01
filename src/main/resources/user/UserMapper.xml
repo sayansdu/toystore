@@ -4,6 +4,11 @@
     <select id="selectUser" resultType="entity.User" parameterType="string">
         select * from k_user where email = #{email}
     </select>
+
+    <select id="getAllUserByEmail" resultType="entity.User" parameterType="string">
+        select id from k_user where email = #{email}
+    </select>
+
     <insert id="insertUser" parameterType="entity.User">
       insert into k_user (name, telephone, password, email, address) values(
       #{name, jdbcType=VARCHAR, mode=IN},

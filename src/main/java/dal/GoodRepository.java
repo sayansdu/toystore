@@ -86,6 +86,20 @@ public class GoodRepository {
         }
     }
 
+    public void deleteOrderGood(long good_id){
+        SqlSession session = SessionFactory.getSessionFactory().openSession();
+        try
+        {
+            session.delete("GoodMapper.deleteOrderGood", good_id);
+            session.commit();
+        } catch(Exception e){
+            e.printStackTrace();
+        } finally{
+            session.close();
+        }
+    }
+
+
     public void updateGood(Goods good){
         SqlSession session = SessionFactory.getSessionFactory().openSession();
         try

@@ -71,7 +71,7 @@ public class Registration extends HttpServlet {
         else
             session.setAttribute("error-repass", null);
 
-        if(email == null || !validate(email)){
+        if(email == null || !validate(email) || !checkEmail(email)){
             counter++;
             session.setAttribute("error-email", "Email не соответствует требованием");
         }
@@ -119,5 +119,16 @@ public class Registration extends HttpServlet {
         pattern = Pattern.compile(EMAIL_PATTERN);
         matcher = pattern.matcher(email);
         return matcher.matches();
+    }
+
+    private boolean checkEmail(String email){
+        try {
+            UserService userService = new UserService();
+            if(userService.checkUserByEmail(email))
+                return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 }

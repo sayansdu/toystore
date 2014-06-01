@@ -43,6 +43,7 @@ public class GoodService {
     }
 
     public void deleteGood(long id) throws Exception {
+        dal.deleteOrderGood(id);
         dal.deleteGood(id);
     }
 

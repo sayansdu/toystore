@@ -1,5 +1,4 @@
 <%@ page import="entity.User" %>
-<%@ page import="entity.Category" %>
 <%@ page import="entity.Order" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
@@ -15,7 +14,8 @@
 						<h5>Ваши заказы
                         "<%
                             User user = (User) session.getAttribute("current_user");
-                            out.println(user.getName());
+                                if(user!=null)
+                                    out.println(user.getName());
                         %>"</h5>
 						<table class="table">
                                       <thead>
@@ -33,8 +33,9 @@
                                       </thead>
                                    
                                         <tbody>
-                                            <%
+                                            <%  if(session.getAttribute("user_orders") != null){
                                                 List<Order> orders = (List<Order>) session.getAttribute("user_orders");
+
                                                 for (int i = 0; i < orders.size(); i++) { %>
                                                     <tr>
                                                         <td><%= orders.get(i).getBuyer().getName() %></td>
@@ -80,6 +81,7 @@
                                                         <% } %>
                                                     </tr>
                                             <%
+                                                }
                                                 }
                                             %>
 
@@ -134,7 +136,7 @@
 								</div>
 							</div>
 						</div>
-
+                    </div>
 				</div>
 			</section>
 

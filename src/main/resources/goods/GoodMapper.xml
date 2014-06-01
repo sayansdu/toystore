@@ -35,9 +35,14 @@
       #{image, jdbcType=BLOB, mode=IN}
       )
     </insert>
+
     <delete id="deleteGood" parameterType="long">
-        delete from k_goods where id = #{id}
+        delete from k_goods where id = #{good_id}
     </delete>
+    <delete id="deleteOrderGood" parameterType="long">
+        delete from order_good where goods = #{good_id}
+    </delete>
+
     <update id="updateGood" parameterType="entity.Goods">
         update k_goods set
           name = #{name},

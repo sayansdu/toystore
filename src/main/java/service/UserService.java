@@ -62,4 +62,16 @@ public class UserService {
     public User getUserById(long id){
         return dal.getUserById(id);
     }
+
+    public User getUserByEmail(String email){
+        return dal.getUserByEmail(email);
+    }
+
+    public boolean checkUserByEmail(String email){
+        List<User> users = dal.getAllUserByEmail(email);
+        if(users.size()>0)
+            return true;
+        else
+            return false;
+    }
 }

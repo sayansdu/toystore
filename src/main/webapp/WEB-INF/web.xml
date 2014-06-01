@@ -74,8 +74,6 @@
       <url-pattern>/Logout</url-pattern>
   </servlet-mapping>  
     
-
-
     <servlet-mapping>
       <servlet-name>Remove_good</servlet-name>
       <url-pattern>/admin/good/delete</url-pattern>
@@ -231,5 +229,14 @@
     <servlet-mapping>
         <servlet-name>GoodSection</servlet-name>
         <url-pattern>/goods/get/by</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GetGoodBySection</servlet-name>
+        <servlet-class>controller.admin.good.select.GetGoodBySection</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetGoodBySection</servlet-name>
+        <url-pattern>/admin/good/get</url-pattern>
     </servlet-mapping>
 </web-app>
